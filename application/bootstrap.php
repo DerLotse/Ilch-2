@@ -120,7 +120,7 @@ Route::set('backend', 'backend(/<controller>(/<action>(/<overflow>)))', array('o
 		'action'     => 'index',
 	));
 
-Route::set('default', '<controller>(/<action>(/<overflow>))', array('overflow' => '.*?'))
+Route::set('default', '(<controller>(/<action>(/<overflow>)))', array('overflow' => '.*?'))
 	->defaults(array(
                 'directory' => 'frontend',
 		'controller' => 'welcome',
