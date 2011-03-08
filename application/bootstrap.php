@@ -106,14 +106,23 @@ Kohana::modules(array(
 	// 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+           'welcome'    => IC_MODPATH.IC_CORE.'welcome'
 	));
 
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
-Route::set('default', '(<controller>(/<action>(/<overflow>)))', array('overflow' => '.*?'))
+Route::set('backend', 'backend(/<controller>(/<action>(/<overflow>)))', array('overflow' => '.*?'))
 	->defaults(array(
+                'directory' => 'backend',
+		'controller' => 'welcome',
+		'action'     => 'index',
+	));
+
+Route::set('default', '(<controller>(/<action>(/<overflow>))', array('overflow' => '.*?'))
+	->defaults(array(
+                'directory' => 'frontend',
 		'controller' => 'welcome',
 		'action'     => 'index',
 	));

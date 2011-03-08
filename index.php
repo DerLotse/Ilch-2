@@ -16,6 +16,30 @@ $application = 'application';
 $modules = 'modules';
 
 /**
+ * The directory in which ilch modules are located.
+ *
+ * @see  http://kohanaframework.org/guide/about.install#modules
+ * @todo own userguide link
+ */
+$ic_modules = $application.DIRECTORY_SEPARATOR.'modules';
+
+/**
+ * The directory name in which ilch core modules are located.
+ *
+ * @see  http://kohanaframework.org/guide/about.install#modules
+ * @todo own userguide link
+ */
+define('IC_CORE', 'ic_core'.DIRECTORY_SEPARATOR);
+
+/**
+ * The directory name in which ilch custom modules are located.
+ *
+ * @see  http://kohanaframework.org/guide/about.install#modules
+ * @todo own userguide link
+ */
+define('IC_CUSTOM', 'ic_custom'.DIRECTORY_SEPARATOR);
+
+/**
  * The directory in which the Kohana resources are located. The system
  * directory must contain the classes/kohana.php file.
  *
@@ -64,6 +88,10 @@ if ( ! is_dir($application) AND is_dir(DOCROOT.$application))
 if ( ! is_dir($modules) AND is_dir(DOCROOT.$modules))
 	$modules = DOCROOT.$modules;
 
+// Make the ilch modules relative to the docroot, for symlink'd index.php
+if ( ! is_dir($ic_modules) AND is_dir(DOCROOT.$ic_modules))
+	$ic_modules = DOCROOT.$ic_modules;
+
 // Make the system relative to the docroot, for symlink'd index.php
 if ( ! is_dir($system) AND is_dir(DOCROOT.$system))
 	$system = DOCROOT.$system;
@@ -71,10 +99,11 @@ if ( ! is_dir($system) AND is_dir(DOCROOT.$system))
 // Define the absolute paths for configured directories
 define('APPPATH', realpath($application).DIRECTORY_SEPARATOR);
 define('MODPATH', realpath($modules).DIRECTORY_SEPARATOR);
+define('IC_MODPATH', realpath($ic_modules).DIRECTORY_SEPARATOR);
 define('SYSPATH', realpath($system).DIRECTORY_SEPARATOR);
 
 // Clean up the configuration vars
-unset($application, $modules, $system);
+unset($application, $modules, $ic_modules, $system);
 
 if (file_exists('install'.EXT))
 {
