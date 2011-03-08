@@ -39,3 +39,5 @@
 2011-03-08 22:55:04 --- ERROR: Http_Exception_404 [ 404 ]: The requested URL backend/welcome/index was not found on this server. ~ SYSPATH\classes\kohana\request\client\internal.php [ 94 ]
 2011-03-08 22:55:30 --- ERROR: Http_Exception_404 [ 404 ]: The requested URL backend/welcome/index was not found on this server. ~ SYSPATH\classes\kohana\request\client\internal.php [ 94 ]
 2011-03-08 22:55:42 --- ERROR: Http_Exception_404 [ 404 ]: The requested URL backend/welcome/index was not found on this server. ~ SYSPATH\classes\kohana\request\client\internal.php [ 94 ]
+2011-03-08 23:15:27 --- ERROR: Http_Exception_404 [ 404 ]: The requested URL backend/welcome/huch was not found on this server. ~ SYSPATH\classes\kohana\request\client\internal.php [ 120 ]
+2011-03-08 23:15:45 --- ERROR: ErrorException [ 2 ]: preg_match() [function.preg-match]: Compilation failed: missing ) at offset 86 ~ SYSPATH\classes\kohana\route.php [ 385 ]
