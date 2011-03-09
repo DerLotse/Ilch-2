@@ -35,3 +35,4 @@
 2011-03-09 09:09:59 --- ERROR: Http_Exception_404 [ 404 ]: The requested URL frontend/backend/index/index was not found on this server. ~ SYSPATH\classes\kohana\request\client\internal.php [ 94 ]
 2011-03-09 09:10:24 --- ERROR: Http_Exception_404 [ 404 ]: The requested URL frontend/backend/index/index was not found on this server. ~ SYSPATH\classes\kohana\request\client\internal.php [ 94 ]
 2011-03-09 09:25:02 --- ERROR: Http_Exception_404 [ 404 ]: Unable to find a route to match the URI: frontend ~ SYSPATH\classes\kohana\request.php [ 733 ]
+2011-03-09 18:02:09 --- ERROR: Http_Exception_404 [ 404 ]: The requested URL frontend/welcome/index/index was not found on this server. ~ SYSPATH\classes\kohana\request\client\internal.php [ 94 ]
