@@ -113,16 +113,23 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
-Route::set('backend', 'backend(/<controller>(/<action>(/<overflow>)))', array('overflow' => '.*?'))
+Route::set('frontend', 'frontend')
 	->defaults(array(
-                'directory' => 'backend',
-		'controller' => 'welcome',
+                'directory' => 'frontend/welcome',
+		'controller' => 'index',
 		'action'     => 'index',
 	));
 
-Route::set('default', '(<controller>(/<action>(/<overflow>)))', array('overflow' => '.*?'))
+Route::set('backend', 'backend')
 	->defaults(array(
-                'directory' => 'frontend',
-		'controller' => 'welcome',
+                'directory' => 'backend/welcome',
+		'controller' => 'index',
+		'action'     => 'index',
+	));
+
+Route::set('default', '(<directory>(/<controller>(/<action>(/<overflow>))))', array('directory' => '(frontend|backend)/[a-z0-9]+', 'overflow' => '.*?'))
+	->defaults(array(
+                'directory' => 'frontend/welcome',
+		'controller' => 'index',
 		'action'     => 'index',
 	));

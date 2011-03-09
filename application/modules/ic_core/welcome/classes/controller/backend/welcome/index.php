@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Frontend_Welcome extends Controller {
+class Controller_Backend_Welcome_Index extends Controller {
 
         /**
          * Test function
@@ -15,7 +15,7 @@ class Controller_Frontend_Welcome extends Controller {
                 print_r($options);
 
                 // Load a template
-		$this->response->body(View::factory('welcome_frontend'));
+		$this->response->body(View::factory('backend/welcome/index'));
 	}
 
 } // End Welcome
