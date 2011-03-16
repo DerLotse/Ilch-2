@@ -21,7 +21,7 @@ $modules = 'modules';
  * @see  http://kohanaframework.org/guide/about.install#modules
  * @todo own userguide link
  */
-$ic_modules = $application.DIRECTORY_SEPARATOR.'modules';
+$ic_modules = $application;
 
 /**
  * The directory name in which ilch core modules are located.
