@@ -99,7 +99,6 @@ Kohana::$config->attach(new Config_File);
  * Enable database
  */
 Kohana::modules(array(
-            IC_CORE.'_database' => IC_MODPATH.IC_CORE.'database', // Database access
             'database' => MODPATH.'database', // Database access
         ));
 
@@ -130,7 +129,7 @@ $modules = array(
     // 'orm'          => MODPATH.'orm',             // Object Relationship Mapping
     // 'unittest'     => MODPATH.'unittest',        // Unit testing
        'userguide' => MODPATH.'userguide',          // User guide and API documentation
-       IC_CORE.'_svn' => IC_MODPATH.IC_CORE.'svn'   // SVN-Manager zum Updaten
+       IC_CORE.'svn' => IC_CORE.'svn'   // SVN-Manager zum Updaten
 );
 
 /**
@@ -138,7 +137,8 @@ $modules = array(
  */
 if (FIRST_RUN === FALSE)
 {
-    $modules['modmanager'] = IC_MODPATH.IC_CORE.'modmanager';
+    $modules[IC_CORE.'template'] = IC_CORE.'template';
+    $modules[IC_CORE.'module'] = IC_CORE.'module';
 }
 
 /**
@@ -152,7 +152,7 @@ Kohana::modules(Kohana::modules() + $modules);
  */
 if (FIRST_RUN === FALSE)
 {
-    Route::set('default', array('Modmanager_Routes', 'index'));
+    Route::set('default', array('Module_Routes', 'index'));
 }
 else
 {
