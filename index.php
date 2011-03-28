@@ -109,6 +109,7 @@ define('APPPATH', realpath($application).DIRECTORY_SEPARATOR);
 define('MODPATH', realpath($modules).DIRECTORY_SEPARATOR);
 define('IC_CORE', realpath($ic_core).DIRECTORY_SEPARATOR);
 define('IC_CUSTOM', realpath($ic_custom).DIRECTORY_SEPARATOR);
+define('IC_MODPATH', '');
 define('IC_THEMES', realpath($ic_themes).DIRECTORY_SEPARATOR);
 define('SYSPATH', realpath($system).DIRECTORY_SEPARATOR);
 
