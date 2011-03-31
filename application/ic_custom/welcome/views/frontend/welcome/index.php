@@ -1,9 +1,4 @@
-<html>
-    <head>
-        <title>Hello World!</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
+        <h1><?php echo $title ?></h1>
         <p>
             Frontend Controller
         </p>
@@ -13,5 +8,3 @@
         <p>
             <a href="<?php echo URL::site('backend'); ?>">Zum Backend wechseln</a>
         </p>
-    </body>
-</html>
