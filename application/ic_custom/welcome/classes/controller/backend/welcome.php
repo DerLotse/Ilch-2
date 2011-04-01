@@ -1,18 +1,23 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php
 
-class Controller_Backend_Welcome extends Controller_Backend {
+defined('SYSPATH') or die('No direct script access.');
 
-	/**
-	 * Test function
-	 * @param string $options Function-Options from URL
-	 */
-	public function action_index($fname = '', $sname = '')
-	{
-		// Set Title
-		$this->template->title = 'Hello World';
+class Controller_Backend_Welcome extends Controller_Backend
+{
 
-		// Load a template
-		$this->template->content = View::factory('backend/welcome/index', array('title' => $this->template->title));
-	}
+    /**
+     * Test function
+     * @param string $options Function-Options from URL
+     */
+    public function action_index($fname = '', $sname = '')
+    {
+        // Set Title
+        $this->template->title = 'Hello World';
 
-} // End Welcome
+        // Load a template
+        $this->template->content = View::factory('backend/welcome/index', array('title' => $this->template->title));
+    }
+
+}
+
+// End Welcome
