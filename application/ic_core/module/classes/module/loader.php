@@ -25,8 +25,11 @@ class Module_Loader extends Module
             // Set modul type
             $mod_type = ($value['core'] == 1) ? IC_CORE : IC_CUSTOM;
 
+			// Assemble module path
+			$module_path = $mod_type.$value['folder'];
+
             // Save modul values
-            $mod_array[$mod_type.$value['folder']] = $mod_type.$value['folder'];
+            $mod_array[$module_path] = $module_path;
         }
 
         // New modules instance
