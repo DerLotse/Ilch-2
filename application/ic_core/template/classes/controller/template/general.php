@@ -5,7 +5,8 @@ defined('SYSPATH') or die('No direct script access.');
 /**
  * Hier kommt alles rein, was für den Frontend-Bereich gilt sowie für den Backend-bereich
  */
-class Controller_Template_General extends Controller_Template {
+class Controller_Template_General extends Controller_Template
+{
 
     /**
      * Initialize properties before running the controller methods (actions),
@@ -25,10 +26,12 @@ class Controller_Template_General extends Controller_Template {
             $this->template->meta_copywrite = '';
             $this->template->content = '';
             $this->template->styles = array();
-			$theme_styles = Kohana::config('public.theme.styles');
-			if (is_array($theme_styles) && count($theme_styles) >= 1) {
-			  $this->template->styles = array_merge($this->template->styles, $theme_styles);
-			}
+            
+            $theme_styles = Kohana::config('public.theme.styles');
+            if (is_array($theme_styles) && count($theme_styles) >= 1)
+            {
+                $this->template->styles = array_merge($this->template->styles, $theme_styles);
+            }
             $this->template->scripts = array();
         }
     }

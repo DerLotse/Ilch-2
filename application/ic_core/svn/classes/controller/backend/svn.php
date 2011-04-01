@@ -54,7 +54,7 @@ class Controller_Backend_Svn extends Controller
         $revisions = Array();
 
         // Ordner definieren
-        $dir = IC_MODPATH.IC_CORE.'svn/classes/updates/';
+        $dir = IC_CORE.'svn/classes/updates/';
 
         // Ordner öffnen
         $open = opendir($dir);

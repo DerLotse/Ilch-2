@@ -12,7 +12,7 @@ class Update
     public static function database($revision)
     {
         // Load SQL-File
-        $sql_file = file_get_contents(IC_MODPATH.IC_CORE.'svn/classes/updates/revision_'.$revision.'.sql');
+        $sql_file = file_get_contents(IC_CORE.'svn/classes/updates/revision_'.$revision.'.sql');
 
         // Edit SQL-File
         $sql_file = preg_replace("/(\015\012|\015|\012)/", "\n", $sql_file);
