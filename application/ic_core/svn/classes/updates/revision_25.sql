@@ -1,0 +1,1 @@
+INSERT INTO `ic1_modules` (`folder`, `core`, `active`) VALUES ('media', '1', '1');
