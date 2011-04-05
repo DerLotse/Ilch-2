@@ -10,9 +10,6 @@ class Controller_Backend_Svn extends Controller
      */
     public function action_index()
     {
-
-        $this->_return_updates();
-//        UPDATE::database(1);
         // Wenn erster Aufruf
         if (FIRST_RUN === TRUE)
         {
