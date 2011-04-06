@@ -10,12 +10,11 @@ return array
     'theme' => array
         (
         'name' => 'Standard Ilch Nr. 1',
-        'description' => 'Ilch2.0 Standard Design - Frontend',
+        'description' => 'Ilch2.0 Standard Design - Backend',
         'styles' => array(
             'media/public/css/reset.css' => 'screen',
-            'media/public/css/style.css' => 'screen',
-            'media/frontend/css/style.css' => 'screen',
-            ),
+            'media/backend/css/style.css' => 'screen'
+        ),
         'scripts' => array(),
     ),
 );

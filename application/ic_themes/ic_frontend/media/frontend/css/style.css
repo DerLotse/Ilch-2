@@ -4,6 +4,10 @@
     border: none;
 }
 
+header, nav, section, article, aside, footer {
+    display: block;
+}
+
 body {
     font-family: Verdana,Arial,Helvetica,sans-serif;
     font-size: 12px;
