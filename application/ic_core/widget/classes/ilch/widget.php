@@ -2,4 +2,8 @@
 
 defined('SYSPATH') or die('No direct script access.');
 
-class Widget extends Ilch_Widget { }
+class Ilch_Widget {
+
+    public $version = '0.0.2';
+
+}

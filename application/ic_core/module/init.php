@@ -3,4 +3,4 @@
 /**
  * Load Modules from database values
  */
-Module_Loader::instance();
+Module::loader();

@@ -2,8 +2,4 @@
 
 defined('SYSPATH') or die('No direct script access.');
 
-class Module {
-
-    public $version = '0.0.1';
-
-}
+class Module extends Ilch_Module { }

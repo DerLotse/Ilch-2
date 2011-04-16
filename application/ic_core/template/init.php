@@ -3,4 +3,4 @@
 /**
  * Load Themes from database values
  */
-Template_Loader::instance();
+Template::loader();

@@ -152,7 +152,7 @@ Kohana::modules(Kohana::modules() + $modules);
  */
 if (FIRST_RUN === FALSE)
 {
-    Route::set('default', array('Module_Routes', 'index'));
+    Route::set('default', array('Module', 'route'));
 }
 else
 {
