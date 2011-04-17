@@ -1,6 +1,6 @@
 <p>
 <?php 
-if (User::login(array('name' => 'Flomavali', 'password' => md5('Flomavali'))) === FALSE)
+if (User::login(array('email' => 'admin@localhost', 'password' => md5('admin'))) === FALSE)
 {
     echo 'Fehler';
 }

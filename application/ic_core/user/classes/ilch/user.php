@@ -24,6 +24,8 @@ class Ilch_User
         
         if ($result->count() == 0 OR $result->count() > 1) return false;
         
+        
+        
         return true;
     }
 
