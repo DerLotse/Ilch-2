@@ -1,0 +1,16 @@
+<?php defined('SYSPATH') or die('No direct script access.'); ?>
+
+2011-03-27 22:11:17 --- ERROR: Database_Exception [ 0 ]: [1146] Table 'ilchcms2x.ic1_modmanager_modules' doesn't exist ( SELECT `folder`, `core` FROM `ic1_modmanager_modules` WHERE `active` = 1 ) ~ MODPATH\database\classes\kohana\database\mysql.php [ 181 ]
+2011-03-27 22:36:05 --- ERROR: Database_Exception [ 0 ]: [1045] Access denied for user 'ODBC'@'localhost' (using password: NO) ~ MODPATH\database\classes\kohana\database\mysql.php [ 67 ]
+2011-03-27 22:36:36 --- ERROR: Database_Exception [ 0 ]: [1045] Access denied for user 'ODBC'@'localhost' (using password: NO) ~ MODPATH\database\classes\kohana\database\mysql.php [ 67 ]
+2011-03-27 22:37:38 --- ERROR: Database_Exception [ 0 ]: [1045] Access denied for user 'ODBC'@'localhost' (using password: NO) ~ MODPATH\database\classes\kohana\database\mysql.php [ 67 ]
+2011-03-27 22:39:39 --- ERROR: ErrorException [ 1 ]: Class 'Database' not found ~ APPPATH\bootstrap.php [ 108 ]
+2011-03-27 22:40:38 --- ERROR: Database_Exception [ 0 ]: [1146] Table 'ilchcms2x.ic1_templates' doesn't exist ( SELECT `folder` FROM `ic1_templates` WHERE `active` = 1 ) ~ MODPATH\database\classes\kohana\database\mysql.php [ 181 ]
+2011-03-27 22:41:16 --- ERROR: Database_Exception [ 0 ]: [1146] Table 'ilchcms2x.ic1_templates' doesn't exist ( SELECT `folder` FROM `ic1_templates` WHERE `active` = 1 ) ~ MODPATH\database\classes\kohana\database\mysql.php [ 181 ]
+2011-03-27 22:42:25 --- ERROR: ErrorException [ 1 ]: Call to undefined method Module_Loader::instance() ~ APPPATH\ic_core\module\init.php [ 6 ]
+2011-03-27 22:42:50 --- ERROR: Database_Exception [ 0 ]: [1146] Table 'ilchcms2x.ic1_modmanager_modules' doesn't exist ( SELECT `folder`, `core` FROM `ic1_modmanager_modules` WHERE `active` = 1 ) ~ MODPATH\database\classes\kohana\database\mysql.php [ 181 ]
+2011-03-27 22:42:59 --- ERROR: ErrorException [ 1 ]: Class 'Modules' not found ~ APPPATH\ic_core\module\classes\module\routes.php [ 6 ]
+2011-03-27 22:47:41 --- ERROR: Http_Exception_404 [ 404 ]: The requested URL  was not found on this server. ~ SYSPATH\classes\kohana\request\client\internal.php [ 94 ]
+2011-03-27 22:48:10 --- ERROR: Http_Exception_404 [ 404 ]: The requested URL  was not found on this server. ~ SYSPATH\classes\kohana\request\client\internal.php [ 94 ]
+2011-03-27 22:48:44 --- ERROR: Http_Exception_404 [ 404 ]: The requested URL  was not found on this server. ~ SYSPATH\classes\kohana\request\client\internal.php [ 94 ]
+2011-03-27 22:52:56 --- ERROR: ErrorException [ 1 ]: Class 'Controller_Template_Backend' not found ~ APPPATH\ic_themes\ilchcms\classes\controller\backend.php [ 8 ]
