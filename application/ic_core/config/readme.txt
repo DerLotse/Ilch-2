@@ -1,1 +1,0 @@
-Reserviert für Seitenkonfiguration
