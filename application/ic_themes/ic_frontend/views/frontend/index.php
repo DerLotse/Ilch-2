@@ -111,7 +111,7 @@
                 <?php echo Widget_Svn::action_index(); ?>
                 
                 <h3>Nutzer-Login</h3>
-                <?php echo Widget_Login::action_index(); ?>
+                <?php //echo Widget_Login::action_index(); ?>
                 
                 <!--<h3>Best joke</h3>
                 <p>
