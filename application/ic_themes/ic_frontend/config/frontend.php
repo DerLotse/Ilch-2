@@ -14,6 +14,7 @@ return array
         'styles' => array(
             'media/public/css/reset.css' => 'screen',
             'media/frontend/css/style.css' => 'screen',
+            'media/frontend/css/formatting.css' => 'screen'
             ),
         'scripts' => array(),
     ),

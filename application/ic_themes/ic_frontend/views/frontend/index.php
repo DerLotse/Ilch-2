@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>HTML5-Testsite</title>
+        <title>Ilch CMS 2.X - <?php echo $title; ?></title>
         <meta name="keywords" content="<?php echo $meta_keywords; ?>" />
         <meta name="description" content="<?php echo $meta_description; ?>" />
         <meta name="copyright" content="<?php echo $meta_copywrite; ?>" />
@@ -111,7 +111,7 @@
                 <?php echo Widget_Svn::action_index(); ?>
                 
                 <h3>Nutzer-Login</h3>
-                <?php //echo Widget_Login::action_index(); ?>
+                <?php // echo Widget_Login::action_index(); ?>
                 
                 <!--<h3>Best joke</h3>
                 <p>
