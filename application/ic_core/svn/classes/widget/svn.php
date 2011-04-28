@@ -11,7 +11,7 @@ class Widget_Svn extends Widget
     public static function action_index()
     {
         // Find the SVN DB-Version
-        $act_revision = DB::select()->from('svn')->order_by('id', 'DESC')->limit(1)->execute()->get('revision', 0);
+        $act_revision = DB::select()->from('settings')->where('name', '=', 'svn_revision')->execute()->get('value', 0);
 
         // Load a template
         return View::factory('widget/svn/index', array('revision' => $act_revision));

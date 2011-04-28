@@ -17,7 +17,7 @@ class Controller_Backend_Svn extends Controller
         }
         else
         {
-            $act_revision = DB::select()->from('svn')->order_by('id', 'DESC')->limit(1)->execute()->get('revision', 0);
+            $act_revision = DB::select()->from('settings')->where('name', '=', 'svn_revision')->execute()->get('value', 0);
         }
 
         // Abrufen von Updates
@@ -33,13 +33,34 @@ class Controller_Backend_Svn extends Controller
                 UPDATE::database($revision);
 
                 // Neue Revision speichern
-                DB::insert('svn', array('revision', 'time'))->values(array($revision, time()))->execute();
+                if ($revision >= 41) DB::update('settings')->set(array('value' => $revision))->where('name', '=', 'svn_revision')->execute();
                 $act_revision = $revision;
             }
         }
 
         // Load a template
         $this->response->body(View::factory('backend/svn/index')->bind('revision', $act_revision));
+    }
+    
+    /**
+     * Löscht alle Tabellen und legt diese neu an
+     */
+    public function action_reset()
+    {
+        // Get all Tables
+        $query = Database::instance()->list_tables();
+        
+        foreach ($query AS $row)
+        {
+            // Drop table
+            DB::query(NULL, 'DROP table '.$row);
+        }
+        
+        // Create tables
+        $this->action_index();
+        
+        // Hinweis
+        $this->response->body('<h1 style="color: green;">Datenbank wurde neu generiert!</h1><p><a href="'.URL::site().'">Weiter zur Startseite</a></p>');
     }
 
     /**
