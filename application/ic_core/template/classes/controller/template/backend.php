@@ -15,6 +15,9 @@ class Controller_Template_Backend extends Controller_Template_General
     {
         // Run anything that need ot run before this.
         parent::before();
+        
+        #Open session
+        $this->session= Session::instance();
 
         // Add Styles by Config
         $theme_styles = Kohana::config('backend.theme.styles');

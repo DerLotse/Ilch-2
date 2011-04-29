@@ -103,21 +103,27 @@ Kohana::$log->attach(new Log_File(APPPATH.'logs'));
 /**
  * Attach a file reader to config. Multiple readers are supported.
  */
-Kohana::$config->attach(new Config_File);
+Kohana::$config->attach(new Config_File, FALSE);
 
 /**
- * Enable database
+ * Enable config and database
  */
 Kohana::modules(array(
+            'setting' => IC_CORE.'setting', // Database settings
             'database' => MODPATH.'database', // Database access
         ));
+
+/**
+ * Attach a database reader to config.
+ */
+Kohana::$config->attach(new Config_Database);
 
 /**
  * Abfrage nach ersten Lauf
  */
 $db = Database::instance();
 $prefix = $db->table_prefix();
-$tables = $db->list_tables($prefix.'svn');
+$tables = $db->list_tables($prefix.'settings');
 
 if (count($tables) == 0)
 {

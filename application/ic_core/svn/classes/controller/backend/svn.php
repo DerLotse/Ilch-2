@@ -49,7 +49,7 @@ class Controller_Backend_Svn extends Controller
     {
         // Get all Tables
         $query = Database::instance()->list_tables();
-        
+
         foreach ($query AS $row)
         {
             // Drop table
