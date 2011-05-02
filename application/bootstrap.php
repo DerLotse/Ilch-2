@@ -4,17 +4,17 @@ defined('SYSPATH') or die('No direct script access.');
 
 // -- Environment setup --------------------------------------------------------
 // Load the core Kohana class
-require SYSPATH.'classes/kohana/core'.EXT;
+require SYSPATH . 'classes/kohana/core' . EXT;
 
-if (is_file(APPPATH.'classes/kohana'.EXT))
+if (is_file(APPPATH . 'classes/kohana' . EXT))
 {
     // Application extends the core
-    require APPPATH.'classes/kohana'.EXT;
+    require APPPATH . 'classes/kohana' . EXT;
 }
 else
 {
     // Load empty core extension
-    require SYSPATH.'classes/kohana'.EXT;
+    require SYSPATH . 'classes/kohana' . EXT;
 }
 
 /**
@@ -74,7 +74,7 @@ COOKIE::$salt = 'testsalt';
  */
 if (isset($_SERVER['KOHANA_ENV']))
 {
-    Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
+    Kohana::$environment = constant('Kohana::' . strtoupper($_SERVER['KOHANA_ENV']));
 }
 
 /**
@@ -91,87 +91,46 @@ if (isset($_SERVER['KOHANA_ENV']))
  * - boolean  caching     enable or disable internal caching                 FALSE
  */
 Kohana::init(array(
-            'base_url' => 'http://'.$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']),
-            'index_file' => ''
-        ));
+    'base_url' => 'http://' . $_SERVER['HTTP_HOST'] . str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']),
+    'index_file' => ''
+));
 
 /**
  * Attach the file write to logging. Multiple writers are supported.
  */
-Kohana::$log->attach(new Log_File(APPPATH.'logs'));
+Kohana::$log->attach(new Log_File(APPPATH . 'logs'));
 
 /**
- * Attach a file reader to config. Multiple readers are supported.
+ * Attach a file reader to config.
  */
-Kohana::$config->attach(new Config_File, FALSE);
+Kohana::$config->attach(new Config_File);
 
 /**
- * Enable config and database
+ * Load Kohana Database Module
  */
 Kohana::modules(array(
-            'setting' => IC_CORE.'setting', // Database settings
-            'database' => MODPATH.'database', // Database access
-        ));
+    'database' => MODPATH . 'database',
+));
 
-/**
- * Abfrage nach ersten Lauf
- */
+/* * *****************************************************************************
+ * ************************* PRÜFUNG AUF ERSTEN AUFRUF **************************
+ * ***************************************************************************** */
 $db = Database::instance();
 $prefix = $db->table_prefix();
-$tables = $db->list_tables($prefix.'settings');
+$tables = $db->list_tables($prefix . 'settings');
 
+// Wenn erster Aufruf
 if (count($tables) == 0)
 {
+    // Definieren
     define('FIRST_RUN', true);
-}
-else
-{
-    define('FIRST_RUN', false);
-}
 
-/**
- * Attach a database reader to config.
- */
-if (FIRST_RUN === FALSE) Kohana::$config->attach(new Config_Database);
+    // Nötige Module laden
+    Kohana::modules(array(
+        'svn' => IC_CORE . 'svn' // SVN-verwaltung
+    )+Kohana::modules());
 
-/**
- * Enable modules. Modules are referenced by a relative or absolute path.
- */
-$modules = array(
-    // 'auth'         => MODPATH.'auth',            // Basic authentication
-    // 'cache'        => MODPATH.'cache',           // Caching with multiple backends
-    // 'codebench'    => MODPATH.'codebench',       // Benchmarking tool
-    // 'image'        => MODPATH.'image',           // Image manipulation
-    // 'orm'          => MODPATH.'orm',             // Object Relationship Mapping
-    // 'unittest'     => MODPATH.'unittest',        // Unit testing
-       'userguide' => MODPATH.'userguide',          // User guide and API documentation
-       IC_CORE.'svn' => IC_CORE.'svn'   // SVN-Manager zum Updaten
-);
-
-/**
- * Entsprechendes Erweitern nach FIRST_LOCK
- */
-if (FIRST_RUN === FALSE)
-{
-    $modules[IC_CORE.'template'] = IC_CORE.'template';
-    $modules[IC_CORE.'module'] = IC_CORE.'module';
-}
-
-/**
- * Module erweitern
- */
-Kohana::modules(Kohana::modules() + $modules);
-
-/**
- * Set the routes. Each route must have a minimum of a name, a URI and a set of
- * defaults for the URI.
- */
-if (FIRST_RUN === FALSE)
-{
-    Route::set('default', array('Module', 'route'));
-}
-else
-{
+    // Route setzen, die sofort Installation anstrebt
     Route::set('default', '(backend(/svn(/index(/first_run))))')
             ->defaults(array(
                 'directory' => 'backend/',
@@ -179,4 +138,38 @@ else
                 'action' => 'reset',
                 'first_run' => TRUE
             ));
+}
+// Wenn NICHT erster Aufruf
+else
+{
+    // Definieren
+    define('FIRST_RUN', false);
+
+    /**
+     * Enable modules. Modules are referenced by a relative or absolute path.
+     */
+    Kohana::modules(array(
+        // Ilch Database Settings Module
+        'setting' => IC_CORE . 'setting', // Database settings
+        
+        // Other Ilch Modules
+        IC_CORE . 'module' => IC_CORE . 'module',
+        IC_CORE . 'template' => IC_CORE . 'template',
+        IC_CORE . 'svn' => IC_CORE . 'svn',
+        
+        // Other Kohana Modules
+        'userguide' => MODPATH . 'userguide', // User guide and API documentation
+        'auth' => MODPATH . 'auth', // Basic authentication
+    )+Kohana::modules());
+
+    /**
+     * Attach a database reader to config.
+     */
+    Kohana::$config->attach(new Config_Database);
+    
+    /**
+     * Set the routes. Each route must have a minimum of a name, a URI and a set of
+     * defaults for the URI.
+     */
+    Route::set('default', array('Module', 'route'));
 }
