@@ -114,11 +114,6 @@ Kohana::modules(array(
         ));
 
 /**
- * Attach a database reader to config.
- */
-Kohana::$config->attach(new Config_Database);
-
-/**
  * Abfrage nach ersten Lauf
  */
 $db = Database::instance();
@@ -133,6 +128,11 @@ else
 {
     define('FIRST_RUN', false);
 }
+
+/**
+ * Attach a database reader to config.
+ */
+if (FIRST_RUN === FALSE) Kohana::$config->attach(new Config_Database);
 
 /**
  * Enable modules. Modules are referenced by a relative or absolute path.
@@ -172,10 +172,11 @@ if (FIRST_RUN === FALSE)
 }
 else
 {
-    Route::set('default', '(backend(/svn(/index)))')
+    Route::set('default', '(backend(/svn(/index(/first_run))))')
             ->defaults(array(
                 'directory' => 'backend/',
                 'controller' => 'svn',
-                'action' => 'index'
+                'action' => 'reset',
+                'first_run' => TRUE
             ));
 }

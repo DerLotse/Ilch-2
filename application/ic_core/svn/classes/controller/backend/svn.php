@@ -8,10 +8,10 @@ class Controller_Backend_Svn extends Controller
     /**
      * Check for updates
      */
-    public function action_index()
+    public function action_index($first_run = FALSE)
     {
         // Wenn erster Aufruf
-        if (FIRST_RUN === TRUE)
+        if (FIRST_RUN === TRUE OR $first_run === TRUE)
         {
             $act_revision = 0;
         }
@@ -45,7 +45,7 @@ class Controller_Backend_Svn extends Controller
     /**
      * Löscht alle Tabellen und legt diese neu an
      */
-    public function action_reset()
+    public function action_reset($first_run = FALSE)
     {
         // Get all Tables
         $query = Database::instance()->list_tables();
@@ -53,14 +53,14 @@ class Controller_Backend_Svn extends Controller
         foreach ($query AS $row)
         {
             // Drop table
-            DB::query(NULL, 'DROP table '.$row);
+            DB::query(NULL, 'DROP table '.$row)->execute();
         }
         
         // Create tables
-        $this->action_index();
+        $this->action_index(TRUE);
         
         // Hinweis
-        $this->response->body('<h1 style="color: green;">Datenbank wurde neu generiert!</h1><p><a href="'.URL::site().'">Weiter zur Startseite</a></p>');
+        if($first_run === FALSE) $this->response->body('<h1 style="color: green;">Datenbank wurde neu generiert!</h1><p><a href="'.URL::site().'">Weiter zur Startseite</a></p>');
     }
 
     /**

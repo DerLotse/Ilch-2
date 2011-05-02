@@ -1,0 +1,1 @@
+INSERT INTO `ilchcms2x`.`ic1_modules` (`id`, `folder`, `core`, `active`) VALUES (NULL, 'user', '1', '1');
