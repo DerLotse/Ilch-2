@@ -103,7 +103,7 @@ Kohana::$log->attach(new Log_File(APPPATH . 'logs'));
 /**
  * Attach a file reader to config.
  */
-Kohana::$config->attach(new Config_File);
+Kohana::$config->attach(new Config_File, FALSE);
 
 /**
  * Load Kohana Database Module
@@ -146,21 +146,30 @@ else
     define('FIRST_RUN', false);
 
     /**
-     * Enable modules. Modules are referenced by a relative or absolute path.
+     * Enable Ilch modules.
      */
     Kohana::modules(array(
         // Ilch Database Settings Module
-        'setting' => IC_CORE . 'setting', // Database settings
+        IC_CORE . 'setting' => IC_CORE . 'setting', // Database settings
         
         // Other Ilch Modules
         IC_CORE . 'module' => IC_CORE . 'module',
         IC_CORE . 'template' => IC_CORE . 'template',
         IC_CORE . 'svn' => IC_CORE . 'svn',
-        
-        // Other Kohana Modules
-        'userguide' => MODPATH . 'userguide', // User guide and API documentation
-        'auth' => MODPATH . 'auth', // Basic authentication
     )+Kohana::modules());
+    
+    /**
+     * Enable Kohana modules.
+     */
+    Kohana::modules(Kohana::modules()+array(
+	   'auth'       => MODPATH.'auth',       // Basic authentication
+	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
+	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
+	// 'image'      => MODPATH.'image',      // Image manipulation
+	// 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
+	// 'unittest'   => MODPATH.'unittest',   // Unit testing
+	   'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+    ));
 
     /**
      * Attach a database reader to config.
