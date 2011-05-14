@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module>
+    <details>
+        <name>
+            <en>jQueryUI for Ilch 2.0</en>
+            <de>jQueryUI für Ilch 2.0</de>
+        </name>
+        <description>
+            <en>jQuery user interface Javascript Framework</en>
+            <de>jQuery Userinterface Javascript Framework</de>
+        </description>
+        <version>1.5.2</version>
+    </details>
+    <links>
+        <download_server>http://www.ilch-base.de/downloads/jqueryui/server</download_server>
+        <download>http://www.ilch-base.de/downloads/jqueryui</download>
+        <homepage>http://jqueryui.com/</homepage>
+        <documentation>http://jqueryui.com/demos/</documentation>
+        <support>http://jqueryui.com/support</support>
+    </links>
+    <autors>
+        <author name="The jQuery Project">
+            <description></description>
+            <website>http://jquery.com/</website>
+            <email></email>
+            <address></address>
+            <location></location>
+            <zip_code></zip_code>
+            <staate></staate>
+        </author>
+        <author name="The jQueryUI Team">
+            <description></description>
+            <website>http://jqueryui.com/</website>
+            <email></email>
+            <address></address>
+            <location></location>
+            <zip_code></zip_code>
+            <staate></staate>
+        </author>
+        <author name="Florian Körner">
+            <description>Adjustment to Ilch CMS 2.0</description>
+            <website>http://www.koerner-ws.de/</website>
+            <email>contact@koerner-ws.de</email>
+            <company>Florian Körner Weblösungen</company>
+            <address></address>
+            <location></location>
+            <zip_code></zip_code>
+            <staate></staate>
+        </author>
+    </autors>
+</module>

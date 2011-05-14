@@ -1,0 +1,168 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+header, nav, section, article, aside, footer {
+    display: block;
+}
+
+body {
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 12px;
+}
+
+video {
+    width: 100%;
+    height: 350px;
+}
+
+audio {
+    width: 100%;
+}
+
+#wrapper {
+    width: 960px;
+    margin: 25px auto;
+    background-color: #FAFAFA;
+}
+
+header#header {
+    position: relative;
+    background-color: #336699;
+}
+
+header#header h1 {
+    font-size: 2.5em;
+    color: #FFF;
+    padding: 25px;
+    margin: 0px;
+}
+
+header#header ul {
+    list-style: none;
+    position: absolute;
+    top: 32px;
+    right: 25px;
+}
+
+header#header ul li {
+    display: inline-block;
+}
+
+header#header ul li a {
+    display: block;
+    color: #DDD;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.5em;
+    padding: 0 10px;
+}
+
+header#header ul li a:hover {
+    color: #FFF;
+}
+
+div#content {
+    float: left;
+    width: 600px;
+    min-height: 400px;
+    margin: 20px 0;
+    padding: 0 5px;
+}
+
+section#news article {
+    float: left;
+    width: 186px;
+    margin-right: 12px;
+    border: 3px solid #6699BB;
+    background-color: #EEE;
+}
+
+section#news article.last {
+    margin-right: 0;
+}
+
+section#news article header {
+    background-color: #6699BB;
+    padding: 8px 5px;
+    color: #FFF;
+}
+
+section#news article header h2 {
+    font-size: 1.4em;
+}
+
+section#news article header h2 time {
+    font-size: .6em;
+    font-style: italic;
+    font-weight: normal;
+}
+
+section#news article p, section#news article footer {
+    padding: 5px;
+}
+
+section#news article footer {
+    font-size: .9em;
+}
+
+section#blog {
+    clear: both;
+}
+
+section#blog article {
+    padding: 15px 0;
+}
+
+section#blog article header {
+    background-color: #6699BB;
+    padding: 5px;
+    color: #FFF;
+}
+
+section#blog article header p {
+    font-style: italic;
+    font-size: .9em;
+    padding: 0px;
+}
+
+section#blog article header p time {
+    font-weight: bold;
+}
+
+section#blog p{
+    padding: 10px 5px 5px 5px;
+}
+
+section#blog footer {
+    padding: 5px;
+    font-size: .9em;
+}
+
+aside#sidebar {
+    float: right;
+    width: 350px;
+}
+
+aside#sidebar h3 {
+    background-color: #FF9933;
+    padding: 10px 5px;
+    margin-top: 20px;
+    color: #FFF;
+    font-size: 1.2em;
+}
+
+aside#sidebar p, aside#sidebar address {
+    margin: 5px 0 20px 0;
+    padding: 5px;
+}
+
+footer#footer {
+    clear: both;
+    background-color: #336699;
+    padding: 10px 5px;
+    color: #FFF;
+    font-size: .8em;
+}
