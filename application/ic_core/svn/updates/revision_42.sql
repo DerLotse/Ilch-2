@@ -1,4 +1,0 @@
-UPDATE `ilchcms2x`.`ic1_modules` SET `folder` = 'user' WHERE `ic1_modules`.`folder` = 'welcome' AND `ic1_modules`.`core` =1 AND `ic1_modules`.`active` =1 LIMIT 1 ;
-INSERT INTO `ilchcms2x`.`ic1_settings` (`id`, `name`, `module`, `position`, `category`, `description`, `type`, `value`, `options`) VALUES (NULL, 'login_method', 'user', '0', 'User control', 'Sign in with nickname or e-mail address?', 'select', 'nickname', 'a:2:{s:8:"nickname";s:8:"nickname";s:5:"email";s:5:"email";}');
-
-INSERT INTO `ilchcms2x`.`ic1_modules` (`id`, `folder`, `core`, `active`) VALUES (NULL, 'blueprint', '1', '1'), (NULL, 'jquery', '1', '1'), (NULL, 'jqueryui', '1', '1');
