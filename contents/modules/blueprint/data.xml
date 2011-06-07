@@ -10,7 +10,8 @@
             <en>Blueprint CSS Framework</en>
             <de>Blueprint CSS Framework</de>
         </description>
-        <version>1.5.2</version>
+        <version>1.0</version>
+        <clear_version>1.0000</clear_version>
     </details>
     <links>
         <download_server>http://www.ilch-base.de/downloads/blueprint/server</download_server>

@@ -10,7 +10,8 @@
             <en>jQuery user interface Javascript Framework</en>
             <de>jQuery Userinterface Javascript Framework</de>
         </description>
-        <version>1.5.2</version>
+        <version>1.8.12</version>
+        <clear_version>1.0812</clear_version>
     </details>
     <links>
         <download_server>http://www.ilch-base.de/downloads/jqueryui/server</download_server>

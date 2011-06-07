@@ -76,7 +76,7 @@ if ( ! is_dir($system) AND is_dir(DOCROOT.$system))
 // Define the absolute paths for configured directories
 define('APPPATH', realpath($application).DIRSEPA);
 define('CONTENT', realpath($contents).DIRSEPA);
-define('MODPATH', realpath(CONTENT.'core'.DIRSEPA.'modules').DIRSEPA);
+define('MODPATH', realpath(CONTENT.'core').DIRSEPA);
 define('SYSPATH', realpath($system).DIRSEPA);
 
 // Clean up the configuration vars

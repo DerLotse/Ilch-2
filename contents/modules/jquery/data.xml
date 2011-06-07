@@ -11,6 +11,7 @@
             <de>jQuery Javascript Framework</de>
         </description>
         <version>1.5.2</version>
+        <clear_version>1.0502</clear_version>
     </details>
     <links>
         <download_server>http://www.ilch-base.de/downloads/jquery/server</download_server>

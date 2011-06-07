@@ -93,7 +93,7 @@ Kohana::$log->attach(new Log_File(APPPATH.'logs'));
 /**
  * Attach a file reader to config. Multiple readers are supported.
  */
-Kohana::$config->attach(new Config_File);
+Kohana::$config->attach(new Config_File, FALSE);
 
 /**
  * Enable ilch core module.
@@ -104,7 +104,7 @@ Kohana::modules(array(
 ));
 
 /**
- * PrÃ¼fe, ob dies der erste Aufruf ist
+ * Pr?¼fe, ob dies der erste Aufruf ist
  */
 $db = Database::instance();
 $prefix = $db->table_prefix();
@@ -113,7 +113,7 @@ $tables = $db->list_tables($prefix.'config');
 // Wenn erster Aufruf
 if (count($tables) == 0)
 {
-    // NÃ¶tige Module laden
+    // N?¶tige Module laden
     Kohana::modules(array('svn' => CONTENT.'modules'.DIRSEPA.'svn') + Kohana::modules());
 
     // Route setzen, die sofort Installation anstrebt
@@ -129,7 +129,7 @@ else
     /**
      * Attach a database reader to config. Multiple readers are supported.
      */
-    Kohana::$config->attach(new Config_Database(), FALSE);
+    Kohana::$config->attach(new Config_Database());
 
     /**
      * Now you can initialize the ILCH CORE - Have fun!

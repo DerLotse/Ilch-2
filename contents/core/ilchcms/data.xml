@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module>
+    <details>
+        <name>
+            <en>Ilch 2.0 Basicsystem</en>
+            <de>Ilch 2.0 Basissystem</de>
+        </name>
+        <description>
+            <en>Blueprint CSS Framework</en>
+            <de>Blueprint CSS Framework</de>
+        </description>
+        <!--<version>REMAKE.VERSION.PATCH STATUS</version>-->
+        <version>2.0.0 Alpha</version>
+        <clear_version>2.0000</clear_version>
+    </details>
+    <links>
+        <download_server>http://www.ilch-base.de/downloads/ilchcms2x/server</download_server>
+        <download>http://www.ilch-base.de/downloads/ilchcms2x</download>
+        <homepage>http://www.ilch-base.de/</homepage>
+        <documentation>http://www.ilch-base.de/documentation</documentation>
+        <support>http://www.ilch.de/forum.html</support>
+    </links>
+    <autors>
+        <author name="Florian Körner">
+            <description></description>
+            <website>http://www.florian-koerner.eu</website>
+            <email>contact@florian-koerner.eu</email>
+            <company>Florian Körner Weblösungen</company>
+            <address></address>
+            <location></location>
+            <zip_code></zip_code>
+            <staate></staate>
+        </author>
+    </autors>
+</module>
