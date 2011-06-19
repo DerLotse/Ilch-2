@@ -7,7 +7,10 @@ class Ilch_Core {
      * @param array with options
      */
     public static function init($options = array())
-    {   
+    {
+        // Set Cookie Salt
+        Cookie::$salt = Kohana::config('cookie.salt');
+        
         // Load active modules from database
         Model::factory('module')->load();
         

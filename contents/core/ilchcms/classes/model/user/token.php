@@ -1,70 +1,79 @@
-<?php defined('SYSPATH') or die('No direct access allowed.');
+<?php
+
+defined('SYSPATH') or die('No direct access allowed.');
+
 /**
- * Default auth user toke
- *
- * @package    Kohana/Auth
- * @author     Kohana Team
- * @copyright  (c) 2007-2011 Kohana Team
- * @license    http://kohanaframework.org/license
+ * Default auth user token
  */
-class Model_Auth_User_Token extends ORM {
+class Model_User_Token extends Model
+{
 
-	// Relationships
-	protected $_belongs_to = array('user' => array());
+    /**
+     * Handles garbage collection and deleting of expired objects.
+     *
+     * @return  void
+     */
+    public function __construct()
+    {
+        if (mt_rand(1, 100) === 1) // @todo Kohana Standard - tut das wirklich not?
+        {
+            // Do garbage collection
+            $this->delete_expired();
+        }
+    }
 
-	/**
-	 * Handles garbage collection and deleting of expired objects.
-	 *
-	 * @return  void
-	 */
-	public function __construct($id = NULL)
-	{
-		parent::__construct($id);
+    /**
+     * Deletes all expired tokens.
+     *
+     * @return  ORM
+     */
+    public function delete_expired()
+    {
+        // Delete all expired tokens
+        return DB::delete('user_tokens')->where('expires', '<', time())->execute();
+    }
 
-		if (mt_rand(1, 100) === 1)
-		{
-			// Do garbage collection
-			$this->delete_expired();
-		}
+    public function create($user_id)
+    {
+        // Daten sammeln
+        $data = array(
+            'user_id' => $user_id,
+            'user_agent' => sha1(Request::$user_agent),
+            'token' => $this->create_token(),
+            'created' => time(),
+            'expires' => time()+Kohana::config('auth.token_expires')*3600 // Aktuelle Zeit + Stunden * Sekunden pro Stunde
+        );
+        
+        // Daten in Datenbank ablegen
+        DB::insert('user_tokens', array_keys($data))->values(array_values($data))->execute();
+        
+        // Daten in Cookie ablegen
+	Cookie::set('authautologin', $data['token'], Kohana::config('auth.token_expires')*3600);
+    }
+    
+    public function get($token = NULL)
+    {
+        if ($token == NULL)
+        {
+            $token = Cookie::get('authautologin');
+        }
+        
+        return DB::select()->from('user_tokens')->where('token', '=', $token)->as_object()->execute()->current();
+    }
+    
+    public function delete($token = NULL)
+    {
+        if ($token == NULL)
+        {
+            $token = Cookie::get('authautologin');
+            Cookie::delete('authautologin');
+        }
+                
+        return DB::delete('user_tokens')->where('token', '=', $token)->execute();
+    }
 
-		if ($this->expires < time() AND $this->_loaded)
-		{
-			// This object has expired
-			$this->delete();
-		}
-	}
-
-	/**
-	 * Deletes all expired tokens.
-	 *
-	 * @return  ORM
-	 */
-	public function delete_expired()
-	{
-		// Delete all expired tokens
-		DB::delete($this->_table_name)
-			->where('expires', '<', time())
-			->execute($this->_db);
-
-		return $this;
-	}
-
-	public function create(Validation $validation = NULL)
-	{
-		$this->token = $this->create_token();
-
-		return parent::create($validation);
-	}
-
-	protected function create_token()
-	{
-		do
-		{
-			$token = sha1(uniqid(Text::random('alnum', 32), TRUE));
-		}
-		while(ORM::factory('user_token', array('token' => $token))->loaded());
-
-		return $token;
-	}
-
-} // End Auth User Token Model
+    protected function create_token()
+    {
+        return sha1(uniqid(Text::random('alnum', 32), TRUE));
+    }
+}
