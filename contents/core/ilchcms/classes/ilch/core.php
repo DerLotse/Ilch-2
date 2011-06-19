@@ -11,6 +11,9 @@ class Ilch_Core {
         // Set Cookie Salt
         Cookie::$salt = Kohana::config('cookie.salt');
         
+        // Set Session adapter
+        Session::$default = 'database';
+        
         // Load active modules from database
         Model::factory('module')->load();
         
