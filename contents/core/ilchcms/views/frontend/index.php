@@ -23,8 +23,8 @@
                 <h3>SVN Datenbank</h3>
                 <?php echo Widget_Svn::get(); ?>
                 <hr />
-                <h3>Login (Ohne Funktion)</h3>
-                <?php //echo Widget_Login::get(); ?>
+                <h3>Login</h3>
+                <?php echo Widget_User_Login::get(); ?>
             </div>
             <hr />
             <div class="span-24 last">

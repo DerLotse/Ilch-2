@@ -15,7 +15,7 @@ abstract class Ilch_User_Auth
         $this->_session = Session::instance();
     }
 
-    public function logged_in()
+    public function logged_in($auto_login = FALSE)
     {
         // Login-Status from Session
         $logged_in = $this->_session->get('logged_in', FALSE);
@@ -26,7 +26,14 @@ abstract class Ilch_User_Auth
         }        
         
         // Check Autologin
-        return $this->auto_login();
+        if ($auto_login === FALSE)
+        {
+            return FALSE;
+        }
+        else
+        {
+            return $this->auto_login();
+        }
     }
 
     public function login($name, $password, $remember = TRUE)

@@ -15,6 +15,7 @@ return array
             'media/blueprint/screen.css' => 'screen',
             'media/blueprint/print.css' => 'print',
             'media/blueprint/plugins/fancy-type/screen.css' => 'screen',
+            'media/general/css/style.css' => 'screen'
         ),
         'scripts' => array(),
     ),
