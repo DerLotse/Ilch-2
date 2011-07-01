@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="container">
-            <h1>Ilch CMS 2.x - Das CMS für jedermann!</h1>
+            <h1>Ilch CMS 2.x - Das CMS für Jedermann!</h1>
             <hr />
             <h2 class="alt"><?php echo $title; ?></h2>
             <hr />
