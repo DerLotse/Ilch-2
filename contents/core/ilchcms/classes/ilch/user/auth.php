@@ -36,13 +36,13 @@ abstract class Ilch_User_Auth
         }
     }
 
-    public function login($name, $password, $remember = TRUE)
+    public function login($login, $password, $remember = TRUE)
     {
         // Hash the password
         $password = $this->hash($password);
 
         // Nutzer beziehen
-        $user = Model::factory('user')->get($name, $password);
+        $user = Model::factory('user')->get($login, $password);
 
         // Wenn kein Ergebnis abbrechen
         if (!$user)
@@ -59,7 +59,7 @@ abstract class Ilch_User_Auth
         // Token erstellen, wenn gefordert
         if ($remember === TRUE)
         {
-            Model::factory('user_token')->create($user['id']);
+            Model::factory('user_token')->create($user['user_id']);
         }
 
         // Weitere Sessionwerte beziehen und speichern

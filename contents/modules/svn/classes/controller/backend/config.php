@@ -14,9 +14,9 @@ class Controller_Backend_Config extends Controller_Backend
         $post = Validation::factory($_POST);
 
         // Set rules
-        $post->rule('group_name', 'not_empty');
+        $post->rule('config_group', 'not_empty');
         $post->rule('config_key', 'not_empty');
-        $post->rule('field_type', 'not_empty');
+        $post->rule('config_field_type', 'not_empty');
         $post->rule('config_value', 'not_empty');
 
 
@@ -25,33 +25,34 @@ class Controller_Backend_Config extends Controller_Backend
         {
             $config_value = $this->get_serialize($_POST['config_value']);
 
-            if (empty($_POST['field_options']) === TRUE)
+            if (empty($_POST['config_field_options']) === TRUE)
             {
-                $field_options = '';
+                $config_field_options = '';
             }
             else
             {
-                $field_options = $this->get_serialize($_POST['field_options']);
+                $config_field_options = $this->get_serialize($_POST['config_field_options']);
             }
 
 
-            $created = "INSERT INTO `ilchcms2x`.`ic1_config` "
-                    . "(`group_name`, `config_key`, `category_name`, `config_description`, `field_type`, `config_value`, `field_options`) "
+            $output = "INSERT INTO `ilchcms2x`.`ic1_config` "
+                    . "(`config_name`, `config_key`, `config_category`, `config_description`, `config_field_type`, `config_value`, `config_field_options`) "
                     . "VALUES ("
-                    . "'" . Arr::get($_POST, 'group_name') . "', "
+                    . "'" . Arr::get($_POST, 'config_group') . "', "
                     . "'" . Arr::get($_POST, 'config_key') . "', "
-                    . "'" . Arr::get($_POST, 'category_name') . "', "
-                    . "'" . Arr::get($_POST, 'category_description') . "', "
-                    . "'" . Arr::get($_POST, 'field_type') . "', "
+                    . "'" . Arr::get($_POST, 'config_category') . "', "
+                    . "'" . Arr::get($_POST, 'config_category') . "', "
+                    . "'" . Arr::get($_POST, 'config_field_type') . "', "
                     . "'" . $config_value . "', "
-                    . "'" . $field_options . "');";
+                    . "'" . $config_field_options . "');";
 
             $errors = array();
             $data = $_POST;
         }
         else
         {
-            $created = '';
+            // Empty Output
+            $output = '';
             
             // No POST - no errors
             if (count($_POST) == 0)
@@ -68,7 +69,7 @@ class Controller_Backend_Config extends Controller_Backend
         }
 
         // Call template
-        $this->template->content = View::factory('backend/svn/config/create', array('errors' => $errors, 'data' => $data, 'created' => $created));
+        $this->template->content = View::factory('backend/svn/config/create', array('errors' => $errors, 'data' => $data, 'output' => $output));
     }
 
     private function get_serialize($data)

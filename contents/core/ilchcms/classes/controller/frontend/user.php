@@ -14,19 +14,59 @@ class Controller_Frontend_User extends Controller_Frontend
     }
     
     /**
-     * Shows the signup mask
+     * Shows the register mask
      */
-    public function action_signup()
+    public function action_register()
     {
-        
+        // Set Title
+        $this->template->title = 'User :: Register';
+
+        // If logged in - redirect to startpage
+        if (User::auth()->logged_in() === TRUE)
+        {
+            Request::initial()->redirect();
+        }
+
+        // Open Validation for POST
+        $post = Validation::factory($_POST);
+
+        // Set rules
+        $post->bind(':password', Arr::get($_POST, 'password'));
+        $post->rule('username', 'not_empty');
+        $post->rule('username', 'Controller_Frontend_User::login', array(':validation', ':field', ':value', ':password'));
+
+        // If POST is valid
+        if ($post->check())
+        {
+            // Redirect
+            Request::initial()->redirect(Arr::get($_POST, 'redirect'));
+        }
+        else
+        {
+            // No POST - no errors
+            if (count($_POST) == 0)
+            {
+                $errors = array();
+                $data = array();
+            }
+            else
+            {
+                // Get all errors and POST-Data
+                $errors = array('errors' => $post->errors('validation'));
+                $data = $_POST;
+            }
+
+            // Call template
+            $this->template->content = View::factory('frontend/user/login', array('errors' => $errors, 'data' => $data));
+        }
     }
     
     /**
      * Confirm the signup, signout and email edit action
      */
-    public function action_confirm($type = NULL, $key = NULL)
+    public function action_confirm($key = NULL)
     {
-        print_r($type).' + '.print_r($key);
+        
     }
     
     /**

@@ -64,13 +64,17 @@ class Controller_Backend_Svn extends Controller
             {
                 // SQL-Update durchführen
                 UPDATE::database($revision);
-
-                // Neue Revision speichern
-                DB::update('config')
-                        ->set(array('config_value' => serialize($revision)))
-                        ->where('config_key', '=', 'svn_version')
-                        ->and_where('group_name', '=', 'ilch')
-                        ->execute();
+                
+                // Wenn Datenbankstruktur bereits richtg
+                if ($revision >= 54)
+                {
+                    // Neue Revision speichern
+                    DB::update('config')
+                            ->set(array('config_value' => serialize($revision)))
+                            ->where('config_key', '=', 'svn_version')
+                            ->and_where('config_group', '=', 'ilch')
+                            ->execute();
+                }
                 
                 // Sichere neue letzte Rev.
                 $last_rev = $revision;

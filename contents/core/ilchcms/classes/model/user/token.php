@@ -30,7 +30,7 @@ class Model_User_Token extends Model
     public function delete_expired()
     {
         // Delete all expired tokens
-        return DB::delete('user_tokens')->where('expires', '<', time())->execute();
+        return DB::delete('user_tokens')->where('user_token_expires', '<', time())->execute();
     }
 
     public function create($user_id)
@@ -39,16 +39,16 @@ class Model_User_Token extends Model
         $data = array(
             'user_id' => $user_id,
             'user_agent' => sha1(Request::$user_agent),
-            'token' => $this->create_token(),
-            'created' => time(),
-            'expires' => time()+Kohana::config('auth.token_expires')*3600 // Aktuelle Zeit + Stunden * Sekunden pro Stunde
+            'user_token_key' => $this->create_token(),
+            'user_token_created' => time(),
+            'user_token_expires' => time()+Kohana::config('auth.token_expires')*3600 // Aktuelle Zeit + Stunden * Sekunden pro Stunde
         );
         
         // Daten in Datenbank ablegen
         DB::insert('user_tokens', array_keys($data))->values(array_values($data))->execute();
         
         // Daten in Cookie ablegen
-	Cookie::set('authautologin', $data['token'], Kohana::config('auth.token_expires')*3600);
+	Cookie::set('authautologin', $data['user_token_key'], Kohana::config('auth.user_token_expires')*3600);
     }
     
     public function get($token = NULL)
@@ -58,7 +58,7 @@ class Model_User_Token extends Model
             $token = Cookie::get('authautologin');
         }
         
-        return DB::select()->from('user_tokens')->where('token', '=', $token)->as_object()->execute()->current();
+        return DB::select()->from('user_tokens')->where('user_token_key', '=', $token)->as_object()->execute()->current();
     }
     
     public function delete($token = NULL)
@@ -69,7 +69,7 @@ class Model_User_Token extends Model
             Cookie::delete('authautologin');
         }
                 
-        return DB::delete('user_tokens')->where('token', '=', $token)->execute();
+        return DB::delete('user_tokens')->where('user_token_key', '=', $token)->execute();
     }
 
     protected function create_token()

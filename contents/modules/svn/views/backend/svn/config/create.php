@@ -32,14 +32,14 @@ foreach($errors AS $error)
 
 echo Form::open('backend/config/create#statement');
 
-echo Form::label('group_name', 'group_name').'<br />';
-echo Form::input('group_name', Arr::get($data, 'group_name'), array('class' => 'text')).'<br />';
+echo Form::label('config_group', 'config_group').'<br />';
+echo Form::input('config_group', Arr::get($data, 'config_group'), array('class' => 'text')).'<br />';
 
 echo Form::label('config_key', 'config_key').'<br />';
 echo Form::input('config_key', Arr::get($data, 'config_key'), array('class' => 'text')).'<br />';
 
-echo Form::label('category_name', 'category_name').'<br />';
-echo Form::input('category_name', Arr::get($data, 'category_name'), array('class' => 'text')).'<br />';
+echo Form::label('config_category', 'config_category').'<br />';
+echo Form::input('config_category', Arr::get($data, 'config_category'), array('class' => 'text')).'<br />';
 
 echo Form::label('category_description', 'category_description').'<br />';
 echo Form::input('category_description', Arr::get($data, 'category_description'), array('class' => 'text')).'<br />';

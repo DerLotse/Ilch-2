@@ -99,21 +99,29 @@ Kohana::$config->attach(new Config_File, FALSE);
  * Enable ilch core module.
  */
 Kohana::modules(array(
-    'core'.DIRSEPA.'database' => MODPATH.'database', // Database access
-    'core'.DIRSEPA.'ilchcms' => MODPATH.'ilchcms' // Ilch CMS
+    'core'.DIRSEPA.'database' => MODPATH.'database' // Database access
 ));
 
 /**
- * Pr?¼fe, ob dies der erste Aufruf ist
+ * Pruefe, ob dies der erste Aufruf ist
  */
 $db = Database::instance();
 $prefix = $db->table_prefix();
 $tables = $db->list_tables($prefix.'config');
 
+/**
+ * Ilch dazuladen
+ */
+Kohana::modules(array(
+    'core'.DIRSEPA.'ilchcms' => MODPATH.'ilchcms' // Database access
+)+Kohana::modules());
+
+
+
 // Wenn erster Aufruf
 if (count($tables) == 0)
 {
-    // N?¶tige Module laden
+    // Noetige Module laden
     Kohana::modules(array('svn' => CONTENT.'modules'.DIRSEPA.'svn') + Kohana::modules());
 
     // Route setzen, die sofort Installation anstrebt

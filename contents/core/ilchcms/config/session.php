@@ -11,5 +11,10 @@ return array(
     ),
     'database' => array(
         'table' => 'sessions',
+        'columns' => array(
+		'session_id'  => 'session_id',
+		'last_active' => 'session_last_active',
+		'contents'    => 'session_contents'
+	)
     ),
 );
