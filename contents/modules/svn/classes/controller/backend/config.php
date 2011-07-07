@@ -41,7 +41,7 @@ class Controller_Backend_Config extends Controller_Backend
                     . "'" . Arr::get($_POST, 'config_group') . "', "
                     . "'" . Arr::get($_POST, 'config_key') . "', "
                     . "'" . Arr::get($_POST, 'config_category') . "', "
-                    . "'" . Arr::get($_POST, 'config_category') . "', "
+                    . "'" . Arr::get($_POST, 'config_descriptionx') . "', "
                     . "'" . Arr::get($_POST, 'config_field_type') . "', "
                     . "'" . $config_value . "', "
                     . "'" . $config_field_options . "');";

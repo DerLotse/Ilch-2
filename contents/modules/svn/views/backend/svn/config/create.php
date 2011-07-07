@@ -41,8 +41,8 @@ echo Form::input('config_key', Arr::get($data, 'config_key'), array('class' => '
 echo Form::label('config_category', 'config_category').'<br />';
 echo Form::input('config_category', Arr::get($data, 'config_category'), array('class' => 'text')).'<br />';
 
-echo Form::label('category_description', 'category_description').'<br />';
-echo Form::input('category_description', Arr::get($data, 'category_description'), array('class' => 'text')).'<br />';
+echo Form::label('config_description', 'config_description').'<br />';
+echo Form::input('config_description', Arr::get($data, 'config_description'), array('class' => 'text')).'<br />';
 
 echo Form::label('field_type', 'field_type').'<br />';
 echo Form::input('field_type', Arr::get($data, 'field_type'), array('class' => 'text')).'<br />';
@@ -62,4 +62,4 @@ echo Form::close();
 <h2<?php if(count($errors) == 0) echo ' id="statement"'; ?>>2. SQL-Satement erhalten</h2>
 <?php
 
-echo Form::textarea('created', $created);
+echo Form::textarea('output', $output);
