@@ -9,13 +9,16 @@ class Controller_Template_Backend extends Controller_Template_General
 {
 
     // Festlegen des Templates
-    public $template = 'backend/index';
+    public $template = 'index';
 
     public function before()
     {
+        // Load Template
+        Model::factory('theme')->load('backend');
+        
         // Run anything that need ot run before this.
         parent::before();
-
+        
         // Add Styles by Config
         $theme_styles = Kohana::config('backend.theme.styles');
         if (is_array($theme_styles) && count($theme_styles) >= 1)

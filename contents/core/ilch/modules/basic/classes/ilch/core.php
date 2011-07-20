@@ -18,7 +18,7 @@ class Ilch_Core {
         Model::factory('module')->load();
         
         // Load needed themes
-        Model::factory('theme')->load();
+        //Model::factory('theme')->load();
     }
     
     /**
