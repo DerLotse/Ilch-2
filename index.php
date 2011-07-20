@@ -18,7 +18,7 @@ $application = 'application';
  *
  * @see  http://kohanaframework.org/guide/about.install#modules
  */
-$contents = 'contents';
+$modules = 'contents';
 
 /**
  * The directory in which the Kohana resources are located. The system
@@ -75,8 +75,7 @@ if ( ! is_dir($system) AND is_dir(DOCROOT.$system))
 
 // Define the absolute paths for configured directories
 define('APPPATH', realpath($application).DIRSEPA);
-define('CONTENT', realpath($contents).DIRSEPA);
-define('MODPATH', realpath(CONTENT.'core').DIRSEPA);
+define('MODPATH', realpath($modules).DIRSEPA);
 define('SYSPATH', realpath($system).DIRSEPA);
 
 // Clean up the configuration vars

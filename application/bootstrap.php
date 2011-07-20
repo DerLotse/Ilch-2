@@ -99,7 +99,7 @@ Kohana::$config->attach(new Config_File, FALSE);
  * Enable ilch core module.
  */
 Kohana::modules(array(
-    'core'.DIRSEPA.'database' => MODPATH.'database' // Database access
+    'core_kohana_modules_database' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'modules'.DIRSEPA.'database' // Database access
 ));
 
 /**
@@ -113,7 +113,7 @@ $tables = $db->list_tables($prefix.'config');
  * Ilch dazuladen
  */
 Kohana::modules(array(
-    'core'.DIRSEPA.'ilchcms' => MODPATH.'ilchcms' // Database access
+    'core_ilch_modules_basic' => MODPATH.'core'.DIRSEPA.'ilch'.DIRSEPA.'modules'.DIRSEPA.'basic' // Database access
 )+Kohana::modules());
 
 
@@ -122,7 +122,7 @@ Kohana::modules(array(
 if (count($tables) == 0)
 {
     // Noetige Module laden
-    Kohana::modules(array('svn' => CONTENT.'modules'.DIRSEPA.'svn') + Kohana::modules());
+    Kohana::modules(array('svn' => MODPATH.'modules'.DIRSEPA.'svn') + Kohana::modules());
 
     // Route setzen, die sofort Installation anstrebt
     Route::set('default', '(backend(/svn(/index(/first_run))))')

@@ -108,7 +108,7 @@ class Controller_Backend_Svn extends Controller
         $revisions = Array();
 
         // Ordner definieren
-        $dir = CONTENT.'modules'.DIRSEPA.'svn'.DIRSEPA.'updates';
+        $dir = MODPATH.'modules'.DIRSEPA.'svn'.DIRSEPA.'updates';
 
         // Ordner öffnen
         $open = opendir($dir);
