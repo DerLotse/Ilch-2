@@ -114,6 +114,7 @@ $tables = $db->list_tables($prefix.'config');
  * Ilch dazuladen
  */
 Kohana::modules(array(
+    'core_kohana_modules_cache' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'modules'.DIRSEPA.'cache', // Cache class
     'core_ilch_modules_basic' => MODPATH.'core'.DIRSEPA.'ilch'.DIRSEPA.'modules'.DIRSEPA.'basic' // Database access
 )+Kohana::modules());
 
