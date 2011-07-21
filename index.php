@@ -66,8 +66,8 @@ if ( ! is_dir($application) AND is_dir(DOCROOT.$application))
 	$application = DOCROOT.$application;
 
 // Make the contents relative to the docroot, for symlink'd index.php
-if ( ! is_dir($contents) AND is_dir(DOCROOT.$contents))
-	$contents = DOCROOT.$contents;
+if ( ! is_dir($modules) AND is_dir(DOCROOT.$modules))
+	$modules = DOCROOT.$modules;
 
 // Make the system relative to the docroot, for symlink'd index.php
 if ( ! is_dir($system) AND is_dir(DOCROOT.$system))
@@ -114,3 +114,4 @@ echo Request::factory()
 	->execute()
 	->send_headers()
 	->body();
+	

@@ -2,10 +2,7 @@
 
 <module>
     <details>
-        <name>
-            <en>Ilch 2.0 Basicsystem</en>
-            <de>Ilch 2.0 Basissystem</de>
-        </name>
+        <name>Ilch 2.0 Basicsystem</name>
         <description>
             <en>Blueprint CSS Framework</en>
             <de>Blueprint CSS Framework</de>
