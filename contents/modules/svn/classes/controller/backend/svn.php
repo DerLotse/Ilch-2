@@ -81,6 +81,9 @@ class Controller_Backend_Svn extends Controller
             }
         }
         
+        // Leere Cache
+        Cache::instance()->delete_all();
+        
         return $last_rev;
     }
 
