@@ -57,37 +57,54 @@ class Kohana_Config_Database extends Config_Reader {
 			return parent::load($group, $config);
 		}
 		
-		// Try get the config from cache
-		$cache = Cache::instance()->get(self::$_cache_key);
+		if (CACHE_ENABLED === TRUE)
+		{
+			// Try get the config from cache
+			$cache = Cache::instance()->get(self::$_cache_key);
+		}
 		
-		if (!$cache)
+		if (CACHE_ENABLED === FALSE or !$cache)
 		{
 			// Load all of the configuration values
-			$query = DB::select('config_key', 'config_value', 'config_group')->from($this->_database_table)
-				->execute();
+			$query = DB::select('config_key', 'config_value', 'config_group')->from($this->_database_table);
+			
+			if (CACHE_ENABLED === FALSE)
+			{
+				$query = $query->where('config_group', '=', $group);
+			}
+			
+			$query = $query->execute();
 			
 			if (count($query) > 0)
 			{
-				$cache = array();
-				
-				// Build the cache configuration array that contains ALL the config entries
-				foreach ($query as $entry)
+				if (CACHE_ENABLED === TRUE)
 				{
-					if (!isset($cache[$entry['config_group']]))
+					$cache = array();
+					
+					// Build the cache configuration array that contains ALL the config entries
+					foreach ($query as $entry)
 					{
-						$cache[$entry['config_group']] = array();
+						if (!isset($cache[$entry['config_group']]))
+						{
+							$cache[$entry['config_group']] = array();
+						}
+						
+						$cache[$entry['config_group']][$entry['config_key']] = unserialize($entry['config_value']);
 					}
 					
-					$cache[$entry['config_group']][$entry['config_key']] = unserialize($entry['config_value']);
+					// Save the configuration in cache
+					Cache::instance()->set(self::$_cache_key, $cache, $this->_cache_lifetime);
 				}
-				
-				// Save the configuration in cache
-				Cache::instance()->set(self::$_cache_key, $cache, $this->_cache_lifetime);
+				else
+				{					
+					// Unserialize the configuration values
+					$config = array_map('unserialize', $query->as_array('config_key', 'config_value'));
+				}
 			}
 		}
 		
 		// Use the group config if it exists
-		if (isset($cache[$group]) === TRUE)
+		if (CACHE_ENABLED === TRUE AND isset($cache[$group]) === TRUE)
 		{
 			$config = $cache[$group];
 		}

@@ -10,10 +10,13 @@ class Model_Module extends Model {
 
 	public function load()
 	{
-		// Try get the modules from cache
-		$module_array = Cache::instance()->get(self::$_modul_cache_key);
+		if (CACHE_ENABLED === TRUE)
+		{
+			// Try get the modules from cache
+			$module_array = Cache::instance()->get(self::$_modul_cache_key);
+		}
 		
-		if (!$module_array)
+		if (CACHE_ENABLED === FALSE OR !$module_array)
 		{
 			// Get active modules
 			$result = DB::select('module_directory', 'module_name')->from('modules')
@@ -52,8 +55,11 @@ class Model_Module extends Model {
 				$module_array[$module_type][str_replace(DIRSEPA, '_', $module_path)] = MODPATH . $module_path;
 			}
 			
-			// Save in Cache
-			Cache::instance()->set(self::$_modul_cache_key, $module_array, $this->_cache_lifetime);
+			if (CACHE_ENABLED === TRUE)
+			{
+				// Save in Cache
+				Cache::instance()->set(self::$_modul_cache_key, $module_array, $this->_cache_lifetime);
+			}
 		}
 		
 		// New modules instance

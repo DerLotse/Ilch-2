@@ -83,7 +83,7 @@ if (isset($_SERVER['KOHANA_ENV']))
 Kohana::init(array(
     'base_url' => 'http://'.$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']),
     'index_file' => '',
-    'profile' => TRUE // enable profiling for dev.
+    'profile' => TRUE, // enable profiling for dev.
 ));
 
 /**
@@ -100,6 +100,7 @@ Kohana::$config->attach(new Config_File, FALSE);
  * Enable ilch core module.
  */
 Kohana::modules(array(
+	'core_kohana_modules_cache' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'modules'.DIRSEPA.'cache',
     'core_kohana_modules_database' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'modules'.DIRSEPA.'database' // Database access
 ));
 
@@ -114,11 +115,21 @@ $tables = $db->list_tables($prefix.'config');
  * Ilch dazuladen
  */
 Kohana::modules(array(
-    'core_kohana_modules_cache' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'modules'.DIRSEPA.'cache', // Cache class
     'core_ilch_modules_basic' => MODPATH.'core'.DIRSEPA.'ilch'.DIRSEPA.'modules'.DIRSEPA.'basic' // Database access
 )+Kohana::modules());
 
-
+/**
+ * Activate Caching System
+ */
+$cache = Kohana::$config->load('cache')->default;
+define('CACHE_ENABLED', $cache['active']);
+if (CACHE_ENABLED === TRUE)
+{
+	Kohana::modules(Kohana::modules()+array(
+	    'core_kohana_modules_cache' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'modules'.DIRSEPA.'cache' // Database access
+	));
+	Cache::$default = $cache['method'];
+}
 
 // Wenn erster Aufruf
 if (count($tables) == 0)
