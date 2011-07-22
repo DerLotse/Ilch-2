@@ -34,8 +34,11 @@ class Controller_Backend_Svn extends Controller {
 	/**
 	 * Löscht alle Tabellen und legt diese neu an
 	 */
-	public function action_reset($first_run = FALSE)
+	public function action_reset()
 	{
+		// Get First_Run
+		$first_run = $this->request->param(0, FALSE);
+		
 		// Tabellen löschen
 		$this->_make_reset();
 		

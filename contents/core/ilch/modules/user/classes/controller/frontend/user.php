@@ -64,9 +64,10 @@ class Controller_Frontend_User extends Controller_Frontend
     /**
      * Confirm the signup, signout and email edit action
      */
-    public function action_confirm($key = NULL)
+    public function action_confirm()
     {
-        
+    	// Get the Key
+        $key = $this->request->param(0, NULL);
     }
     
     /**

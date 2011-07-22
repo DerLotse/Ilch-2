@@ -6,7 +6,7 @@ class Controller_Frontend_Welcome extends Controller_Frontend {
 	 * Test function
 	 * @param string $options Function-Options from URL
 	 */
-	public function action_index($options = '')
+	public function action_index()
 	{
 		// Set Title
 		$this->template->title = 'Hello World';

@@ -9,7 +9,7 @@ class Controller_Backend_Welcome extends Controller_Backend
      * Test function
      * @param string $options Function-Options from URL
      */
-    public function action_index($fname = '', $sname = '')
+    public function action_index()
     {
         // Set Title
         $this->template->title = 'Hello World';
