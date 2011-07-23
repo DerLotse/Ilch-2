@@ -99,7 +99,10 @@ abstract class Ilch_User_Auth
         $this->_session->set('logged_in', TRUE);
 
         // Nutzerdaten speichern
-        $this->_session->set('user', $user);
+        $this->_session->set('user_data', $user);
+        
+        // Get and save permissions
+        $this->_session->set('user_permissions', array()); // @todo Get Group Permissions
 
         // do domething else
     }
@@ -115,7 +118,10 @@ abstract class Ilch_User_Auth
             $this->_session->delete('logged_in');
 
             // Remove Userdata
-            $this->_session->delete('user');
+            $this->_session->delete('user_data');
+            
+            // Remove User_Permissions
+            $this->_session->delete('user_permissions');
 
             // Remove something else
         }

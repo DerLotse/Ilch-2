@@ -20,7 +20,7 @@ class Controller_Template_Backend extends Controller_Template_General
         parent::before();
         
         // Add Styles by Config
-        $theme_styles = Kohana::config('backend.theme.styles');
+        $theme_styles = Kohana::$config->load('backend')->theme['styles'];
         if (is_array($theme_styles) && count($theme_styles) >= 1)
         {
             $this->template->styles = array_merge($this->template->styles, $theme_styles);
