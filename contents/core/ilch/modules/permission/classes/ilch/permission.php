@@ -47,7 +47,7 @@ class Ilch_Permission {
 					if (CACHE_ENABLED === TRUE)
 					{
 						// Save the configuration in cache
-						Cache::instance()->set(self::$_cache_key, $cache, Permission::$_cache_lifetime);
+						Cache::instance()->set(Permission::$_cache_key, $cache, Permission::$_cache_lifetime);
 					}
 				}
 			}

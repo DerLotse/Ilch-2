@@ -11,6 +11,11 @@ if (is_file(APPPATH.'classes/kohana'.EXT))
     // Application extends the core
     require APPPATH.'classes/kohana'.EXT;
 }
+else if (is_file(MODPATH.'core/ilch/modules/basic/classes/kohana'.EXT))
+{
+	// Ilch Basic Module extends the core
+	require MODPATH.'core/ilch/modules/basic/classes/kohana'.EXT;
+}
 else
 {
     // Load empty core extension
@@ -84,6 +89,7 @@ Kohana::init(array(
     'base_url' => 'http://'.$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']),
     'index_file' => '',
     'profile' => TRUE, // enable profiling for dev.
+	'caching' => TRUE
 ));
 
 /**
