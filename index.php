@@ -79,7 +79,7 @@ define('MODPATH', realpath($modules).DIRSEPA);
 define('SYSPATH', realpath($system).DIRSEPA);
 
 // Clean up the configuration vars
-unset($application, $contents, $system);
+unset($application, $modules, $system);
 
 if (file_exists('install'.EXT))
 {

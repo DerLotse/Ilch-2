@@ -35,20 +35,22 @@ class Model_User_Token extends Model
 
     public function create($user_id)
     {
+    	$config = Kohana::$config->load('auth');
+    	
         // Daten sammeln
         $data = array(
             'user_id' => $user_id,
             'user_agent' => sha1(Request::$user_agent),
             'user_token_key' => $this->create_token(),
             'user_token_created' => time(),
-            'user_token_expires' => time()+Kohana::config('auth.token_expires')*3600 // Aktuelle Zeit + Stunden * Sekunden pro Stunde
+            'user_token_expires' => time()+$config->user_token_expires*3600 // Aktuelle Zeit + Stunden * Sekunden pro Stunde
         );
         
         // Daten in Datenbank ablegen
         DB::insert('user_tokens', array_keys($data))->values(array_values($data))->execute();
         
         // Daten in Cookie ablegen
-	Cookie::set('authautologin', $data['user_token_key'], Kohana::config('auth.user_token_expires')*3600);
+		Cookie::set('authautologin', $data['user_token_key'], $config->user_token_expires*3600);
     }
     
     public function get($token = NULL)

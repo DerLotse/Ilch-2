@@ -100,7 +100,7 @@ class Kohana extends Kohana_Core {
 			}
 		}
 		
-		if (Kohana::$caching === TRUE and strpos($dir, DIRSEPA . 'themes' . DIRSEPA) === false)
+		if (Kohana::$caching === TRUE and strpos($dir, DIRSEPA . 'themes' . DIRSEPA) === FALSE)
 		{
 			// Add the path to the cache
 			Kohana::$_files[$path . ($array ? '_array' : '_path')] = $found;

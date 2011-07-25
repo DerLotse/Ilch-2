@@ -8,7 +8,7 @@
 <ul>
     <li><a href="<?php echo URL::site('backend/config/create'); ?>" style="color: grey;">Config Statement Generator</a></li>
 </ul>
-<?php if (CACHE_ENABLED === TRUE): ?>
+<?php if (Ilch::$caching === TRUE): ?>
 <ul>
 	<li><a href="<?php echo URL::site('backend/cache'); ?>" style="color: darkgrey;">Cache leeren</a></li>
 </ul>

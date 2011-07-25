@@ -10,7 +10,7 @@ class Controller_Backend_Svn extends Controller {
 	public function action_index()
 	{
 		// Update ausführen
-		$revision = $this->_make_update(Kohana::config('ilch.svn_version'));
+		$revision = $this->_make_update(Kohana::$config->load('ilch')->svn_version);
 		
 		// Load a template
 		$this->response->body(View::factory('backend/svn/index')->bind('revision', $revision));
@@ -83,7 +83,7 @@ class Controller_Backend_Svn extends Controller {
 		}
 		
 		// Leere Konfiguration Cache
-		if (CACHE_ENABLED === TRUE) Cache::instance()->delete('database_config');
+		if (Ilch::$caching === TRUE) Cache::instance()->delete('database_config');
 		
 		return $last_rev;
 	}

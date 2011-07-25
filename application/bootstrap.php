@@ -89,7 +89,8 @@ Kohana::init(array(
     'base_url' => 'http://'.$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']),
     'index_file' => '',
     'profile' => TRUE, // enable profiling for dev.
-	'caching' => TRUE
+	'caching' => TRUE,
+	'cache_life' => 3600 // @todo noch zu testen, ob eine Stunde sinnvoll oder doch nur eine Minute
 ));
 
 /**
@@ -100,7 +101,7 @@ Kohana::$log->attach(new Log_File(APPPATH.'logs'));
 /**
  * Attach a file reader to config. Multiple readers are supported.
  */
-Kohana::$config->attach(new Config_File, FALSE);
+Kohana::$config->attach(new Config_File);
 
 /**
  * Enable ilch core module.
@@ -124,19 +125,6 @@ Kohana::modules(array(
     'core_ilch_modules_basic' => MODPATH.'core'.DIRSEPA.'ilch'.DIRSEPA.'modules'.DIRSEPA.'basic' // Database access
 )+Kohana::modules());
 
-/**
- * Activate Caching System
- */
-$cache = Kohana::$config->load('cache')->default;
-define('CACHE_ENABLED', $cache['active']);
-if (CACHE_ENABLED === TRUE)
-{
-	Kohana::modules(Kohana::modules()+array(
-	    'core_kohana_modules_cache' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'modules'.DIRSEPA.'cache' // Database access
-	));
-	Cache::$default = $cache['method'];
-}
-
 // Wenn erster Aufruf
 if (count($tables) == 0)
 {
@@ -153,15 +141,24 @@ if (count($tables) == 0)
 }
 else
 {
-    /**
-     * Attach a database reader to config. Multiple readers are supported.
-     */
-    Kohana::$config->attach(new Config_Database());
-
+	/**
+	 * Activate Caching System
+	 */
+	$cache = Kohana::$config->load('cache')->default;
+	if ($cache['active'] === TRUE)
+	{
+		Kohana::modules(Kohana::modules()+array(
+		    'core_kohana_modules_cache' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'modules'.DIRSEPA.'cache' // Database access
+		));
+		Cache::$default = $cache['method'];
+	}
+    
     /**
      * Now you can initialize the ILCH CORE - Have fun!
      */
-    Ilch::init();
+    Ilch::init(array(
+    	'caching' => $cache['active']
+    ));
 
     /**
      * Set the routes. Each route must have a minimum of a name, a URI and a set of

@@ -10,7 +10,8 @@ class Model_Theme extends Model
      */
     public function load($controller = 'frontend')
     {
-        $theme = Kohana::config('ilch.default_'.$controller.'_theme');
+    	$controller = 'default_'.$controller.'_theme';
+        $theme = Kohana::$config->load('ilch')->$controller;
         
         // Load first the ilchcms theme and then the others
         Kohana::modules(array(

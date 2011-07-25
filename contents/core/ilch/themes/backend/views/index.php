@@ -14,6 +14,13 @@
         	<div class="span-24 last">
                 <?php echo $content; ?>
             </div>
+            <hr />
+            <div class="span-24 last">
+            	<p class="right">
+            		Ilch <?php echo Ilch::CODENAME.' '.Ilch::VERSION; ?>
+            	</p>
+            </div>
+            <hr />
             <div class="span-24 last">
                 <h3>Active Modules</h3>
                 <table>

@@ -19,12 +19,12 @@ class Ilch_Permission {
 	{
 		if (Permission::$_instance !== TRUE)
 		{
-			if (CACHE_ENABLED === TRUE)
+			if (Ilch::$caching === TRUE)
 			{
 				$cache = Cache::instance()->get(Permission::$_cache_key);
 			}
 			
-			if (CACHE_ENABLED === FALSE or !$cache)
+			if (Ilch::$caching === FALSE or !$cache)
 			{
 				$query = DB::select('permission_group', 'permission_key', 'permission_value')->from('permissions')
 					->execute();

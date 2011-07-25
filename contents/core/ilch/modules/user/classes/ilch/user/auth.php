@@ -101,8 +101,14 @@ abstract class Ilch_User_Auth
         // Nutzerdaten speichern
         $this->_session->set('user_data', $user);
         
+        // Get user config and permission
+        $group_data = Group::data_by_user($user['user_id']);
+        
+        // Get and save configuration
+        $this->_session->set('user_config', $group_data['config']);
+        
         // Get and save permissions
-        $this->_session->set('user_permissions', array()); // @todo Get Group Permissions
+        $this->_session->set('user_permissions', $group_data['permissions']);
 
         // do domething else
     }
@@ -120,7 +126,10 @@ abstract class Ilch_User_Auth
             // Remove Userdata
             $this->_session->delete('user_data');
             
-            // Remove User_Permissions
+            // Remove User Configuration
+            $this->_session->delete('user_config');
+            
+            // Remove User Permissions
             $this->_session->delete('user_permissions');
 
             // Remove something else
@@ -140,7 +149,8 @@ abstract class Ilch_User_Auth
      */
     public function hash($password)
     {
-        return hash_hmac(Kohana::config('auth.hash_method'), $password, Kohana::config('auth.hash_key'));
+    	$config = Kohana::$config->load('auth');
+        return hash_hmac($config->hash_method, $password, $config->hash_key);
     }
 
 }
