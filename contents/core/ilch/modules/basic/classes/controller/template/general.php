@@ -7,9 +7,9 @@ defined('SYSPATH') or die('No direct script access.');
  */
 class Controller_Template_General extends Controller_Template {
 
-	public $auth_required = FALSE;
+	public static $auth_required = FALSE;
 
-	public $permissions_required = FALSE;
+	public static $permissions_required = FALSE;
 
 	/**
 	 * Initialize properties before running the controller methods (actions),
@@ -20,21 +20,8 @@ class Controller_Template_General extends Controller_Template {
 		// Run anything that need ot run before this.
 		parent::before();
 		
-		// Get current action
-		$action_name = $this->request->action();
-		
-		// Check for auth status
-		if (($this->auth_required === TRUE or (is_array($this->auth_required) and in_array($action_name, $this->auth_required))) and User::auth()->logged_in() === FALSE)
-		{
-			Session::instance()->set('login_redirect', URL::site($this->request->uri()));
-			$this->request->redirect('permission/denied/login');
-		}
-		
-		// Check for permissions
-		if ($this->permissions_required !== FALSE and isset($this->permissions_required[$action_name]) === TRUE and Permission::has($this->permissions_required[$action_name]) === FALSE)
-		{
-			$this->request->redirect('permission/denied');
-		}
+		// Check Permission
+		static::access_permission($this->request->action());
 		
 		if ($this->auto_render)
 		{
@@ -56,6 +43,44 @@ class Controller_Template_General extends Controller_Template {
 	{
 		// Run anything that needs to run after this.
 		parent::after();
+	}
+
+	/**
+	 * Prüft ob Berechtigungen für Controller-Action vorhanden sind. Kann außerhalb des Controllers abgerufen werden.
+	 * @param string $action Name der Action-Funktion
+	 * @param boolean $redirect Weiterleitung oder Wahrheitswert
+	 */
+	public static function access_permission($action, $redirect = TRUE)
+	{
+		// Check for auth status
+		if ((static::$auth_required === TRUE or (is_array(static::$auth_required) and in_array($action, static::$auth_required))) and User::auth()->logged_in() === FALSE)
+		{
+			if ($redirect === TRUE)
+			{
+				Session::instance()->set('login_redirect', URL::site($this->request->uri()));
+				Request::initial()->redirect('permission/denied/login');
+			}
+			else
+			{
+				return FALSE;
+			}
+		}
+		
+		// Check for permissions
+		if (static::$permissions_required !== FALSE and isset(static::$permissions_required[$action]) === TRUE and Permission::has(static::$permissions_required[$action]) === FALSE)
+		{
+			if ($redirect === TRUE)
+			{
+				Request::initial()->redirect('permission/denied');
+			}
+			else
+			{
+				return FALSE;
+			}
+		}
+		
+		// Nothing happens
+		return TRUE;
 	}
 
 }
