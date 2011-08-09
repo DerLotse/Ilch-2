@@ -20,11 +20,11 @@ class Ilch_Group {
 			Group::$_group_data = Cache::instance()->get(Group::$_cache_key, array());
 		}
 		
-		// Create function cache
-		$cache = array();
-		
 		// Create caching check
 		$new_values = FALSE;
+		
+		// Create empty cache
+		$cache = array();
 		
 		foreach ($group_id as $group)
 		{
@@ -53,6 +53,12 @@ class Ilch_Group {
 		if ($new_values === TRUE AND Ilch::$caching === TRUE)
 		{
 			Cache::instance()->set(Group::$_cache_key, Group::$_group_data, Group::$_cache_lifetime);
+		}
+		
+		// If no values ​​exist, set empty values
+		if ($cache == FALSE)
+		{
+			$cache = array('config' => array(), 'permissions' => array());
 		}
 		
 		// Return cached array
