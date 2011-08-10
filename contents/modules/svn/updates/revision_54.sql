@@ -1,4 +1,4 @@
-CREATE TABLE `ilchcms2x`.`ic1_user_confirmations` (
+CREATE TABLE `ic1_user_confirmations` (
 `confirmation_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `user_id` INT UNSIGNED NOT NULL ,
 `confirmation_key` VARCHAR( 40 ) NOT NULL ,
@@ -14,7 +14,7 @@ CHANGE `category_name` `config_category` VARCHAR( 32 ) CHARACTER SET utf8 COLLAT
 CHANGE `field_type` `config_field_type` VARCHAR( 16 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
 CHANGE `field_options` `config_field_options` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
 
-INSERT INTO `ilchcms2x`.`ic1_config` (`config_group`, `config_key`, `config_category`, `config_description`, `config_field_type`, `config_value`, `config_field_options`) VALUES ('auth', 'register_activation', 'Usercontrol', 'Welche Schritte müssen nach der Registrierung eines neuen Benutzers erfolgen?', 'select_multiple', 'a:2:{s:18:"admin_confirmation";s:1:"1";s:18:"email_confirmation";s:1:"1";}', 'a:2:{s:5:"class";s:4:"ilch";s:8:"function";s:19:"list_register_types";}');
+INSERT INTO `ic1_config` (`config_group`, `config_key`, `config_category`, `config_description`, `config_field_type`, `config_value`, `config_field_options`) VALUES ('auth', 'register_activation', 'Usercontrol', 'Welche Schritte müssen nach der Registrierung eines neuen Benutzers erfolgen?', 'select_multiple', 'a:2:{s:18:"admin_confirmation";s:1:"1";s:18:"email_confirmation";s:1:"1";}', 'a:2:{s:5:"class";s:4:"ilch";s:8:"function";s:19:"list_register_types";}');
 
 ALTER TABLE `ic1_modules` CHANGE `id` `module_id` INT( 11 ) UNSIGNED NOT NULL AUTO_INCREMENT ,
 CHANGE `core` `module_core` INT( 2 ) UNSIGNED NOT NULL ,
@@ -43,4 +43,4 @@ CHANGE `token` `user_token_key` VARCHAR( 40 ) CHARACTER SET utf8 COLLATE utf8_ge
 CHANGE `created` `user_token_created` INT( 11 ) UNSIGNED NOT NULL ,
 CHANGE `expires` `user_token_expires` INT( 11 ) UNSIGNED NOT NULL;
 
-UPDATE `ilchcms2x`.`ic1_config` SET `config_key` = 'user_token_expires' WHERE `ic1_config`.`config_key` = 'token_expires';
+UPDATE `ic1_config` SET `config_key` = 'user_token_expires' WHERE `ic1_config`.`config_key` = 'token_expires';

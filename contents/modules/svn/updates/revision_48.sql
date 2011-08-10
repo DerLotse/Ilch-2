@@ -1,5 +1,5 @@
-INSERT INTO `ilchcms2x`.`ic1_modules` (`id`, `core`, `active`, `name`, `version`) VALUES (NULL, '1', '1', 'auth', '0');
-INSERT INTO `ilchcms2x`.`ic1_modules` (`id`, `core`, `active`, `name`, `version`) VALUES (NULL, '1', '1', 'userguide', '0');
+INSERT INTO `ic1_modules` (`id`, `core`, `active`, `name`, `version`) VALUES (NULL, '1', '1', 'auth', '0');
+INSERT INTO `ic1_modules` (`id`, `core`, `active`, `name`, `version`) VALUES (NULL, '1', '1', 'userguide', '0');
 
 INSERT INTO `ic1_config` (`group_name`, `config_key`, `category_name`, `config_description`, `field_type`, `config_value`, `field_options`) VALUES
 ('auth', 'hash_key', 'Usercontrol', '', 'input', 's:58:"Muss waehrend der Installation automatisch erstellt werden";', '');
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `ic1_users` (
   PRIMARY KEY (`id`)
 ) ENGINE = MYISAM ;
 
-CREATE TABLE `ilchcms2x`.`ic1_user_tokens` (
+CREATE TABLE `ic1_user_tokens` (
 `id` INT( 11 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `user_id` INT( 11 ) UNSIGNED NOT NULL ,
 `user_agent` VARCHAR( 40 ) NOT NULL ,
