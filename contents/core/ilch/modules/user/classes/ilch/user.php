@@ -22,5 +22,20 @@ class Ilch_User
 
         return User::$_instance['auth'];
     }
+    
+    /**
+     *
+     * @return  User_Permission
+     */
+    public static function permission()
+    {
+        if (!isset(User::$_instance['permission']))
+        {
+            // Create a new instance
+            User::$_instance['permission'] = new User_Permission();
+        }
+
+        return User::$_instance['permission'];
+    }
 
 }

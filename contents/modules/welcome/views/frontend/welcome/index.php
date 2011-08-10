@@ -10,7 +10,3 @@
 <p>
     <a href="<?php echo URL::site('backend'); ?>">Zum Backend wechseln</a>
 </p>
-
-<?php
-
-echo (Permission::has(array('flomavali.ilch' => array('admin')))) ? 'DU HAST DAS RECHT' : 'NEIN, DU HAST DIESES RECHT NICHT';

@@ -3,25 +3,24 @@ defined('SYSPATH') or die('No direct script access.');
 
 class Ilch_Permission {
 
-	protected static $_instance = FALSE;
+	protected $_instance = FALSE;
 
-	protected static $_permissions = array();
+	protected $_permissions = array();
 
-	protected static $_cache_key = 'permission_cache';
+	protected $_cache_key = 'permission_cache';
 
-	protected static $_cache_lifetime = NULL;
+	protected $_cache_lifetime = NULL;
 
 	/**
-	 * 
-	 * Enter description here ...
+	 * Ruft alle Standard-Berechtigungen ab und mischt die Session dazu
 	 */
-	protected static function init()
+	protected function __construct()
 	{
-		if (Permission::$_instance !== TRUE)
+		if ($this->_instance !== TRUE)
 		{
 			if (Ilch::$caching === TRUE)
 			{
-				$cache = Cache::instance()->get(Permission::$_cache_key);
+				$cache = Cache::instance()->get($this->_cache_key);
 			}
 			
 			if (Ilch::$caching === FALSE or !$cache)
@@ -47,16 +46,13 @@ class Ilch_Permission {
 					if (CACHE_ENABLED === TRUE)
 					{
 						// Save the configuration in cache
-						Cache::instance()->set(Permission::$_cache_key, $cache, Permission::$_cache_lifetime);
+						Cache::instance()->set($this->_cache_key, $cache, $this->_cache_lifetime);
 					}
 				}
 			}
 			
 			// Merge Session Permissions and Default Permissions
-			Permission::$_permissions = array_merge($cache, Session::instance()->get('user_permissions', array()));
-			
-			// Set instance
-			Permission::$_instance = TRUE;
+			$this->_permissions = array_merge($cache, Session::instance()->get('user_permissions', array()));
 		}
 	}
 
@@ -66,18 +62,18 @@ class Ilch_Permission {
 	 * 
 	 * only one permission
 	 *
-	 *     Permission::has('group', 'key', 'default' = FALSE);
+	 *     User::Permision->has('group', 'key', 'default' = FALSE);
 	 *
 	 * more permissions
 	 *
-	 *     Permission::has(array(
+	 *     User::Permision->has(array(
 	 * 						'group1' => array('key1' => 'default', 'key2' => 'default'),
 	 * 						'group2' => array('key1' => 'default')
 	 * 						));
 	 *
 	 * or without default parameter
 	 *
-	 *     Permission::has(array(
+	 *     User::Permision->has(array(
 	 *    					'group1' => array('key1', 'key2'),
 	 *    					'group2' => array('key1')
 	 *    					));
@@ -88,11 +84,8 @@ class Ilch_Permission {
 	 * @throws Kohana_Exception
 	 * @return boolean
 	 */
-	public static function has($group, $key = NULL, $default = FALSE)
+	public function has($group, $key = NULL, $default = FALSE)
 	{
-		// Get instance
-		Permission::init();
-
 		if (is_array($group))
 		{
 			foreach ($group as $group => $values)
@@ -101,11 +94,11 @@ class Ilch_Permission {
 				{
 					if (is_numeric($value_key) === TRUE)
 					{
-						if(Permission::has($group, $value_default, $default) === FALSE) return FALSE;
+						if($this->has($group, $value_default, $default) === FALSE) return FALSE;
 					}
 					else
 					{
-						if(Permission::has($group, $value_key, $value_default) === FALSE) return FALSE;
+						if($this->has($group, $value_key, $value_default) === FALSE) return FALSE;
 					}
 				}
 			}
@@ -118,11 +111,11 @@ class Ilch_Permission {
 			throw new Kohana_Exception('Missing $key for $group ":group"', array(':group' => $group));
 		}
 		
-		if (isset(Permission::$_permissions[$group][$key]) === FALSE)
+		if (isset($this->_permissions[$group][$key]) === FALSE)
 		{
 			return $default;
 		}
 
-		return (bool) Permission::$_permissions[$group][$key];
+		return (bool) $this->_permissions[$group][$key];
 	}
 }
