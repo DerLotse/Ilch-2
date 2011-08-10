@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module>
+    <details>
+        <name>
+            <en>Tinymce for Ilch 2.0</en>
+            <de>Tinymce für Ilch 2.0</de>
+        </name>
+        <description>
+            <en>Tinymce Javascript WYSIWYG Editor</en>
+            <de>Tinymce Javascript WYSIWYG Editor</de>
+        </description>
+        <version>3.4.4_jquery</version>
+        <clear_version>3.44_jquery</clear_version>
+    </details>
+    <links>
+        <download_server>http://www.ilch-base.de/downloads/tinymce/server</download_server>
+        <download>http://www.ilch-base.de/downloads/tinymce</download>
+        <homepage>http://www.tinymce.com/</homepage>
+        <documentation>http://www.tinymce.com/wiki.php</documentation>
+        <support>http://www.tinymce.com/forum/index.php</support>
+    </links>
+    <autors>
+        <author name="Moxiecode Systems AG">
+            <description></description>
+            <website>http://www.moxiecode.com/</website>
+            <email></email>
+            <address></address>
+            <location></location>
+            <zip_code></zip_code>
+            <staate></staate>
+        </author>
+        <author name="Horst Fickel">
+            <description></description>
+            <website>http://www.web-wack.at</website>
+            <email>contact@web-wack.at</email>
+			<company>web wack creations</company>
+            <address></address>
+            <location></location>
+            <zip_code></zip_code>
+            <staate>Austria</staate>
+        </author>
+    </autors>
+</module>
