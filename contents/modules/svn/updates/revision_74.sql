@@ -1,0 +1,1 @@
+INSERT INTO `ilchcms2x`.`ic1_modules` (`module_id`, `module_directory`, `module_active`, `module_name`, `module_version`) VALUES (NULL, 'core_ilch', '1', 'jquery-ui', '1');
