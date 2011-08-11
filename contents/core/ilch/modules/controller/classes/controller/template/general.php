@@ -7,9 +7,9 @@ defined('SYSPATH') or die('No direct script access.');
  */
 class Controller_Template_General extends Controller_Template {
 
-	public static $auth_required = FALSE;
+	public $auth_required = FALSE;
 
-	public static $permissions_required = FALSE;
+	public $permissions_required = FALSE;
 
 	/**
 	 * Initialize properties before running the controller methods (actions),
@@ -21,7 +21,7 @@ class Controller_Template_General extends Controller_Template {
 		parent::before();
 		
 		// Check Permission
-		static::access_permission($this->request->action());
+		$this->access_permission($this->request->action());
 		
 		if ($this->auto_render)
 		{
@@ -44,16 +44,16 @@ class Controller_Template_General extends Controller_Template {
 		// Run anything that needs to run after this.
 		parent::after();
 	}
-
+	
 	/**
-	 * Prüft ob Berechtigungen für Controller-Action vorhanden sind. Kann außerhalb des Controllers abgerufen werden.
+	 * Prüft ob Berechtigungen für Controller-Action vorhanden sind.
 	 * @param string $action Name der Action-Funktion
 	 * @param boolean $redirect Weiterleitung oder Wahrheitswert
 	 */
-	public static function access_permission($action, $redirect = TRUE)
+	public function access_permission($action, $redirect = TRUE)
 	{
 		// Check for auth status
-		if ((static::$auth_required === TRUE or (is_array(static::$auth_required) and in_array($action, static::$auth_required))) and User::auth()->logged_in() === FALSE)
+		if (($this->auth_required === TRUE or (is_array($this->auth_required) and in_array($action, $this->auth_required))) and User::auth()->logged_in() === FALSE)
 		{
 			if ($redirect === TRUE)
 			{
@@ -67,7 +67,7 @@ class Controller_Template_General extends Controller_Template {
 		}
 		
 		// Check for permissions
-		if (static::$permissions_required !== FALSE and isset(static::$permissions_required[$action]) === TRUE and User::permission()->has(static::$permissions_required[$action]) === FALSE)
+		if ($this->permissions_required !== FALSE and isset($this->permissions_required[$action]) === TRUE and Permission::has($this->permissions_required[$action]) === FALSE)
 		{
 			if ($redirect === TRUE)
 			{
