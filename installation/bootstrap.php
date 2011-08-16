@@ -1,25 +1,19 @@
-<?php
-
-defined('SYSPATH') or die('No direct script access.');
+<?php defined('SYSPATH') or die('No direct script access.');
 
 // -- Environment setup --------------------------------------------------------
+
 // Load the core Kohana class
 require SYSPATH.'classes/kohana/core'.EXT;
 
 if (is_file(APPPATH.'classes/kohana'.EXT))
 {
-    // Application extends the core
-    require APPPATH.'classes/kohana'.EXT;
-}
-else if (is_file(MODPATH.'core/ilch/modules/basic/classes/kohana'.EXT))
-{
-	// Ilch Basic Module extends the core
-	require MODPATH.'core/ilch/modules/basic/classes/kohana'.EXT;
+	// Application extends the core
+	require APPPATH.'classes/kohana'.EXT;
 }
 else
 {
-    // Load empty core extension
-    require SYSPATH.'classes/kohana'.EXT;
+	// Load empty core extension
+	require SYSPATH.'classes/kohana'.EXT;
 }
 
 /**
@@ -59,7 +53,7 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
 /**
  * Set the default language
  */
-I18n::lang('en-us');
+I18n::lang('en');
 
 /**
  * Set Kohana::$environment if a 'KOHANA_ENV' environment variable has been supplied.
@@ -69,7 +63,7 @@ I18n::lang('en-us');
  */
 if (isset($_SERVER['KOHANA_ENV']))
 {
-    Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
+	Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
 }
 
 /**
@@ -86,11 +80,8 @@ if (isset($_SERVER['KOHANA_ENV']))
  * - boolean  caching     enable or disable internal caching                 FALSE
  */
 Kohana::init(array(
-    'base_url' => 'http://'.$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']),
-    'index_file' => '',
-    'profile' => TRUE, // enable profiling for dev.
-	'caching' => TRUE,
-	'cache_life' => 3600 // @todo noch zu testen, ob eine Stunde sinnvoll oder doch nur eine Minute
+	'base_url'   => preg_replace('/[^\/]+$/','',$_SERVER['SCRIPT_NAME']),
+	'index_file' => '',
 ));
 
 /**
@@ -104,41 +95,21 @@ Kohana::$log->attach(new Log_File(APPPATH.'logs'));
 Kohana::$config->attach(new Config_File);
 
 /**
- * Enable ilch core module.
+ * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-    'core_kohana_modules_cache' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'modules'.DIRSEPA.'cache',
-    'core_kohana_modules_database' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'modules'.DIRSEPA.'database' // Database access
+	'core_kohana_modules_database' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'modules'.DIRSEPA.'database',
+        'core_kohana_modules_guide' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'modules'.DIRSEPA.'userguide',
+	'core_ilch_modules_media' => MODPATH.'core'.DIRSEPA.'ilch'.DIRSEPA.'modules'.DIRSEPA.'media',
+	'core_ilch_modules_jquery' => MODPATH.'core'.DIRSEPA.'ilch'.DIRSEPA.'modules'.DIRSEPA.'jquery'
 ));
 
 /**
- * Ilch dazuladen
+ * Set the routes. Each route must have a minimum of a name, a URI and a set of
+ * defaults for the URI.
  */
-Kohana::modules(array(
-    'core_ilch_modules_basic' => MODPATH.'core'.DIRSEPA.'ilch'.DIRSEPA.'modules'.DIRSEPA.'basic' // Database access
-)+Kohana::modules());
-
-	/**
-	 * Activate Caching System
-	 */
-	$cache = Kohana::$config->load('cache')->default;
-	if ($cache['active'] === TRUE)
-	{
-		Kohana::modules(Kohana::modules()+array(
-		    'core_kohana_modules_cache' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'modules'.DIRSEPA.'cache' // Database access
-		));
-		Cache::$default = $cache['method'];
-	}
-    
-    /**
-     * Now you can initialize the ILCH CORE - Have fun!
-     */
-    Ilch::init(array(
-    	'caching' => $cache['active']
-    ));
-
-    /**
-     * Set the routes. Each route must have a minimum of a name, a URI and a set of
-     * defaults for the URI.
-     */
-    Route::set('default', array('Ilch', 'route'));
+Route::set('default', '(<controller>(/<action>(/<language>)))')
+	->defaults(array(
+		'controller' => 'installation',
+		'action'     => 'step0',
+	));

@@ -23,7 +23,7 @@ abstract class Ilch_User_Auth
         if ($logged_in === TRUE)
         {
             return TRUE;
-        }        
+        }
         
         // Check Autologin
         if ($auto_login === FALSE)

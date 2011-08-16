@@ -16,7 +16,7 @@ class Model_Group extends Model {
 	function config($group_id)
 	{
 		// DB Query
-		$result = DB::select('group_config.config_value', 'config.config_group', 'config.config_key')->from('group_config')
+		$result = DB::select('group_config.group_config_value', 'config.config_group', 'config.config_key')->from('group_config')
 			->join('config', 'LEFT')
 			->on('group_config.config_id', '=', 'config.config_id')
 			->where('group_config.group_id', '=', $group_id)
@@ -30,7 +30,7 @@ class Model_Group extends Model {
 			foreach ($result as $row)
 			{
 				// Fill function cache
-				$cache[$row['config_group']][$row['config_key']] = unserialize($row['config_value']);
+				$cache[$row['config_group']][$row['config_key']] = unserialize($row['group_config_value']);
 			}
 		}
 		

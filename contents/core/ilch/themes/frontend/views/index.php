@@ -29,7 +29,9 @@
             <hr />
             <div class="span-24 last">
             	<p class="right">
+            	
             		Ilch <?php echo Ilch::CODENAME.' '.Ilch::VERSION; ?>
+            		
             	</p>
             </div>
             <hr />
