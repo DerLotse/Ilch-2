@@ -1,2 +1,2 @@
-UPDATE `ic1_config` SET `config_value` = 's:24:"core_ilch_themes_backend";' WHERE `ic1_config`.`config_key` = 'default_backend_theme';
-UPDATE `ic1_config` SET `config_value` = 's:25:"core_ilch_themes_frontend";' WHERE `ic1_config`.`config_key` = 'default_frontend_theme';
+UPDATE `$prefix_config` SET `config_value` = 's:24:"core_ilch_themes_backend";' WHERE `$prefix_config`.`config_key` = 'default_backend_theme';
+UPDATE `$prefix_config` SET `config_value` = 's:25:"core_ilch_themes_frontend";' WHERE `$prefix_config`.`config_key` = 'default_frontend_theme';

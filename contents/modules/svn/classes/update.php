@@ -11,22 +11,39 @@ class Update
      */
     public static function database($revision)
     {
-        // Load SQL-File
-        $sql_file = file_get_contents(MODPATH.'modules'.DIRSEPA.'svn'.DIRSEPA.'updates'.DIRSEPA.'revision_'.$revision.'.sql');
+    	// Temporary variable, used to store current query
+		$cache = '';
+		
+		// Read in entire file
+		$lines = file(MODPATH.'modules'.DIRSEPA.'svn'.DIRSEPA.'updates'.DIRSEPA.'revision_'.$revision.'.sql');
+		
+		// Get prefix
+		$prefix = Kohana::$config->load('database');
+		$prefix = $prefix[Database::$default]['table_prefix'];
+		
+		// Loop through each line
+		foreach ($lines as $line)
+		{
+		    // Skip it if it's a comment
+		    if (substr($line, 0, 2) == '--' || $line == '')
+		        continue;
+		 
+		    // Replace prefix
+		    $line = str_replace('$prefix_', $prefix, $line);
+		        
+		    // Add this line to the current segment
+		    $cache .= $line;
+		    
+		    // If it has a semicolon at the end, it's the end of the query
+		    if (substr(trim($line), -1, 1) == ';')
+		    {
+		        // Perform the query
+		        DB::query(NULL, $cache)->execute();
 
-        // Edit SQL-File
-        $sql_file = preg_replace("/(\015\012|\015|\012)/", "\n", $sql_file);
-        $sql_statements = explode(";\n", $sql_file);
-
-        // Database-Queries
-        foreach ($sql_statements as $sql_statement)
-        {
-            if (trim($sql_statement) != '')
-            {
-                // Datebase-Query
-                DB::query(NULL, $sql_statement)->execute();
-            }
-        }
+		    	// Reset temp variable to empty
+		        $cache = '';
+		    }
+		}
     }
 
 }
