@@ -22,7 +22,7 @@ INSERT INTO `$prefix_config` (`config_id`, `config_group`, `config_key`, `config
 (1, 'ilch', 'start_controller', 'Allgemeine Einstellungen', 'Welcher Controller soll als Startseite dienen?', 'select', 's:7:"welcome";', 'a:2:{s:5:"class";s:4:"ilch";s:8:"function";s:16:"list_controllers";}'),
 (2, 'ilch', 'default_backend_theme', 'Allgemeine Einstellungen', 'Welches Backend-Theme soll als Standard genutzt werden?', 'select', 's:24:"core_ilch_themes_backend";', 'a:2:{s:5:"class";s:4:"ilch";s:8:"function";s:19:"list_backend_themes";}'),
 (3, 'ilch', 'default_frontend_theme', 'Allgemeine Einstellungen', 'Welches Frontend-Theme soll als Standard genutzt werden?', 'select', 's:25:"core_ilch_themes_frontend";', 'a:2:{s:5:"class";s:4:"ilch";s:8:"function";s:20:"list_frontend_themes";}'),
-(4, 'ilch', 'svn_version', '', '', 'hidden', 's:2:"81";', ''),
+(4, 'ilch', 'svn_version', '', '', 'hidden', 's:2:"83";', ''),
 (5, 'auth', 'hash_key', 'Usercontrol', '', 'input', 's:58:"Muss waehrend der Installation automatisch erstellt werden";', ''),
 (6, 'auth', 'user_token_expires', 'Usercontrol', 'Wie viele Stunden ist ein automatischer Login möglich?', 'input', 's:2:"48";', ''),
 (7, 'cookie', 'salt', '', '', 'input', 's:58:"Muss waehrend der Installation automatisch erstellt werden";', ''),
@@ -203,11 +203,11 @@ CREATE TABLE `$prefix_users` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_status` int(10) unsigned NOT NULL,
   `user_login` varchar(32) NOT NULL,
-  `user_password` varchar(100) NOT NULL,
+  `user_password` text NOT NULL,
   `user_email` varchar(124) NOT NULL,
   `user_nickname` varchar(32) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
