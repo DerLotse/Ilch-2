@@ -1,3 +1,3 @@
-# Kohana PHP Framework, version 3.1 (release)
+# Ilch CMS, version 2.0 (git-version)
 
-This is the current release version of [Kohana](http://kohanaframework.org/).
+This is the current git version of [Ilch CMS](http://www.ilch.net/).
