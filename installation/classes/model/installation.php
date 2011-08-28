@@ -16,7 +16,7 @@ class Model_Installation extends Model
 
         while ($name = readdir($directory))
         {
-            if (is_dir($name) === TRUE AND in_array($name, array('.svn', 'system', 'installation', 'contents', '..', '.')) === FALSE)
+            if (is_dir($name) === TRUE AND in_array($name, array('.git', '.svn', 'system', 'installation', 'contents', '..', '.')) === FALSE)
             {
                 if (file_exists($name . DIRSEPA . 'config' . DIRSEPA . 'database' . EXT) === FALSE)
                     $directories[$name] = $name;
