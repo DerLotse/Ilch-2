@@ -98,10 +98,10 @@ Kohana::$config->attach(new Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-	'core_kohana_modules_database' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'modules'.DIRSEPA.'database',
-        'core_kohana_modules_guide' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'modules'.DIRSEPA.'userguide',
-	'core_ilch_modules_media' => MODPATH.'core'.DIRSEPA.'ilch'.DIRSEPA.'modules'.DIRSEPA.'media',
-	'core_ilch_modules_jquery' => MODPATH.'core'.DIRSEPA.'ilch'.DIRSEPA.'modules'.DIRSEPA.'jquery'
+	'kohana_database' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'database',
+        'kohana_guide' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'userguide',
+	'ilch_media' => MODPATH.'core'.DIRSEPA.'ilch'.DIRSEPA.'media',
+	'ilch_jquery' => MODPATH.'core'.DIRSEPA.'ilch'.DIRSEPA.'jquery'
 ));
 
 /**

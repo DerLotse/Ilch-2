@@ -19,7 +19,7 @@ class Model_Module extends Model {
 		if (Ilch::$caching === FALSE OR !$module_array)
 		{
 			// Get active modules
-			$result = DB::select('module_directory', 'module_name')->from('modules')
+			$result = DB::select('module_name')->from('modules')
 				->where('module_active', '=', 1)
 				->execute()
 				->as_array();
