@@ -21,6 +21,12 @@ class Ilch_Core {
 			Ilch::$caching = $options['caching'];
 		}
 		
+		// Get modules
+		Ilch::load_modules();
+		
+		echo Ilch::module_path('ilch_svn');
+		
+		/*
 		// Attach a database reader to config.
 		Kohana::$config->attach(new Config_Database());
 		
@@ -35,6 +41,63 @@ class Ilch_Core {
 		
 		// Load active modules from database
 		Model::factory('module')->load();
+		*/
+	}
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 */
+	public static function load_modules()
+	{
+		// Load cache data
+		$cache = (Ilch::$caching) ? Kohana::cache('Ilch::load_modules()') : NULL;
+		
+		// If cache invalid
+		if (!$cache)
+		{
+			// Load database module
+			Kohana::modules(array('kohana_database' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'database'));
+			
+			// Get all active modules
+			$query = DB::select('module_name', 'module_version')->from('modules')->execute();
+			
+			foreach ($query AS $row)
+			{
+				print_r($row);
+			}
+		}
+	}
+	
+	/**
+	 * Get module path by name
+	 * @param string $module_name
+	 * @return string module path
+	 */
+	public static function module_path($module_name)
+	{
+		// Split module name
+		$module_arr = explode('_', $module_name);
+		
+		// Check data
+		if (count($module_arr) == 1)
+		{
+			return ((is_dir(APPPATH.'modules'.DIRSEPA.$module_arr[0])) ? APPPATH : MODPATH).'modules'.DIRSEPA.$module_arr[0];
+		}
+		else
+		{
+			return MODPATH.'core'.DIRSEPA.$module_arr[0].DIRSEPA.$module_arr[1];
+		}
+	}
+	
+	/**
+	 * Get theme path by name
+	 * @param string $theme_name
+	 * @return string Theme path
+	 */
+	public static function theme_path($theme_name)
+	{
+		return ((is_dir(APPPATH.'themes'.DIRSEPA.$theme_name)) ? APPPATH : MODPATH).'themes'.DIRSEPA.$theme_name;
 	}
 
 	/**

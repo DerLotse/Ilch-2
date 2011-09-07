@@ -27,7 +27,7 @@ return array(
                 'staate' => __('Germany'),
             ),
         ),
-        'dependencies' => array('ilch_media'),
-        'extends' => array('core_kohana_modules_database', 'modules_welcome')
+        'required' => array('ilch_media'),
+        'expand' => array('core_kohana_modules_database', 'modules_welcome')
     )
 );
