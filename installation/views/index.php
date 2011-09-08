@@ -3,15 +3,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title><?php echo $title; ?></title>
-        <?php echo HTML::style('media/installation/css/reset.css'); ?>
-        <?php echo HTML::style('media/installation/css/style.css'); ?>
-        <?php echo HTML::script('media/js/jquery.js'); ?>
-        <?PHP echo HTML::script('media/installation/js/custom.js'); ?>
+        <?php echo HTML::style(Kohana::$index_file.'/media/installation/css/reset.css'); ?>
+        <?php echo HTML::style(Kohana::$index_file.'/media/installation/css/style.css'); ?>
+        <?php echo HTML::script(Kohana::$index_file.'/media/js/jquery.js'); ?>
+        <?PHP echo HTML::script(Kohana::$index_file.'/media/installation/js/custom.js'); ?>
     </head>
     <body>
         <div id="wrapper">
             <aside>
-                <?php echo HTML::image('media/installation/images/logo.png'); ?>
+                <?php echo HTML::image(Kohana::$index_file.'/media/installation/images/logo.png'); ?>
                 <ul>
                     <?php $steps_count = count($steps); ?>
                     <?php foreach ($steps AS $step => $name): ?>

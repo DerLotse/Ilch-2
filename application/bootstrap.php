@@ -96,8 +96,8 @@ if (isset($_SERVER['KOHANA_ENV']))
  * - boolean  caching     enable or disable internal caching                 FALSE
  */
 Kohana::init(array(
-    'base_url' => 'http://'.$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']),
-    'index_file' => '',
+    'base_url' => preg_replace('/[^\/]+$/','',$_SERVER['SCRIPT_NAME']),
+    'index_file' => 'index.php',
     'profile' => TRUE, // enable profiling for dev.
     'caching' => TRUE,
     'cache_life' => 3600 // @todo noch zu testen, ob eine Stunde sinnvoll oder doch nur eine Minute

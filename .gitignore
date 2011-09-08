@@ -2,3 +2,4 @@
 application/cache/
 application/config/database.php
 application/logs/
+installation/logs/
