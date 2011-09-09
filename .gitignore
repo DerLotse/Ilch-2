@@ -1,4 +1,5 @@
-*.htaccess
+*.DS_Store
+.htaccess
 application/cache/
 application/config/database.php
 application/logs/

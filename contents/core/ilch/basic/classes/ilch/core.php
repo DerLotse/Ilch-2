@@ -32,10 +32,9 @@ class Ilch_Core {
 		// Get modules
 		Ilch::load_modules();
 		
-		/*
 		// Attach a database reader to config.
 		Kohana::$config->attach(new Config_Database());
-		
+
 		// Set session adapter
 		Session::$default = 'database';
 		
@@ -44,10 +43,6 @@ class Ilch_Core {
 		
 		// Attach a session reader to config.
 		Kohana::$config->attach(new Config_Session());
-		
-		// Load active modules from database
-		Model::factory('module')->load();
-		*/
 	}
 	
 	/**
@@ -59,7 +54,10 @@ class Ilch_Core {
 		Kohana::modules(array('kohana_database' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'database'));
 		
 		// Get all active modules
-		Ilch::$_module_cache = DB::select('module_name', 'module_version')->from('modules')->execute()->as_array('module_name', 'module_version');
+		Ilch::$_module_cache = DB::select('module_name', 'module_version')->from('modules')
+								->where('module_status', '=', 1)
+								->execute()
+								->as_array('module_name', 'module_version');
 			
 		// If cache valid
 		if (Ilch::$_module_cache)
@@ -77,49 +75,60 @@ class Ilch_Core {
 	/**
 	 * Load given module
 	 */
-	public static function load_module($module, $version)
+	public static function load_module($module)
 	{	
 		// Abort if module already loaded
 		if (isset(Ilch::$modules[$module])) return TRUE;
+	
+		// About if module is not in the cache
+		if (!isset(Ilch::$_module_cache[$module])) return FALSE;
 		
         // Load module path
 		$module_path = Ilch::module_path($module);
-		
+	
 		// Check module directory
 		if (!is_dir($module_path)) return FALSE;
 		
 		// Load configuration
 		$config = Arr::get((file_exists($module_path.'config'.DIRSEPA.'module'.EXT)) ? Kohana::load($module_path.'config'.DIRSEPA.'module'.EXT) : array(), $module, array());
 		
+		// Save version number
+		Ilch::$module_version[$module] = Ilch::version_number(Arr::get(Arr::get($config, 'details', array()), 'version', 0));
+		
 		// Check module version
-		if (!empty($version) AND Ilch::version_compare($version, '<', Arr::get(Arr::get($config, 'details', array()), 'version', 0)))
+		if (Ilch::$_module_cache[$module] < Ilch::$module_version[$module])
 		{
+			// There must be an update
 			// @todo Automatisches installieren neuer Datenbankeinträge
 		}
-		else if(!empty($version) AND Ilch::version_compare($version, '>', Arr::get(Arr::get($config, 'details', array()), 'version', 0)))
+		else if(Ilch::$_module_cache[$module] > Ilch::$module_version[$module])
 		{
+			// There is a later version installed
 			return FALSE;
 		}
-		
-		// Save version number
-		Ilch::$module_version[$module] = (!empty($version)) ? Arr::get(Arr::get($config, 'details', array()), 'version', 0) : 0;
 		
         // Module position
         $position = NULL;
 		
 	    // Place using required data
-        if (isset($config['required']))
+        if (isset($config['required']) AND is_array($config['required']))
         {
             foreach ($config['required'] AS $required_module => $required_version)
             {
-				// If module is not loaded
-				if (!isset(Ilch::$modules[$required_module]) AND !Ilch::load_module($required_module, $required_version))
+				// Convert to array
+				$required_version = (array) $required_version;	
+				
+				// If module is not loaded and can not be loaded
+				if (!isset(Ilch::$modules[$required_module]) AND !Ilch::load_module($required_module))
 				{
 					return FALSE;
 				}
-				else if (isset(Ilch::$modules[$required_module]) AND true)
+				
+				// Check module version
+				if ((isset($required_version[0]) AND Ilch::$module_version[$module] >= Ilch::version_number($required_version[0])) OR
+					(isset($required_version[1]) AND Ilch::$module_version[$module] <= Ilch::version_number($required_version[1])))
 				{
-					// @todo Hier weiterarbeiten ;)
+					return FALSE;
 				}
             }
         }
@@ -143,7 +152,7 @@ class Ilch_Core {
         }
         else
         {
-            Ilch::$modules[$modules] = Ilch::module_place($module, $module_path, $position);
+            Ilch::$modules[$module] = Ilch::module_place($module, $module_path, $position);
         }
 				
 		// Set new module positions
@@ -151,6 +160,31 @@ class Ilch_Core {
 		
 		return TRUE;
 	}
+	
+	public static function module_place($module_name, $module_path, $position)
+	{
+		$i = 0;
+        $new_array = array();
+
+        foreach (Ilch::$modules AS $key => $value)
+        {
+            if ($position == $i) $new_array[$module_name] = $module_path;
+            $new_array[$key] = $value;
+            $i++;
+        }
+
+        if (!isset($new_array[$module_name])) $new_array[$module_name] = $module_path;
+
+        return $new_array;
+	}
+	
+	/**
+	 * Load one module entry into the virtual module cache
+	 */
+	public static function module_set($module_name, $module_version)
+	{
+		Ilch::$_module_cache[$module_name] = $module_version;
+	}	
 	
 	/**
 	 * Send loaded modules to Kohana
@@ -177,7 +211,7 @@ class Ilch_Core {
 		}
 		else
 		{
-			return MODPATH.'core'.DIRSEPA.$module_arr[0].DIRSEPA.$module_arr[1];
+			return MODPATH.'core'.DIRSEPA.$module_arr[0].DIRSEPA.$module_arr[1].DIRSEPA;
 		}
 	}
 	
@@ -248,7 +282,7 @@ class Ilch_Core {
 		);
 		
 		// Format and return
-		return sprintf('%d.%03d%03d%03d%03d', $version[0], $version[1], $version[2], $version[3], $version[4]);
+		return sprintf('%d.%02d%02d%02d%02d', $version[0], $version[1], $version[2], $version[3], $version[4]);
 	}
 	
 
