@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'ilch_basic' => array(
+    'ilch_user' => array(
         'details' => array(
             'name' => __('Ilch Basic Module'),
             'description' => '',

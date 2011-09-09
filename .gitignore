@@ -1,5 +1,8 @@
 *.DS_Store
 .htaccess
+.buildpath
+.project
+.settings/
 application/cache/
 application/config/database.php
 application/logs/

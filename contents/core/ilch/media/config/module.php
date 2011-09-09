@@ -1,17 +1,17 @@
 <?php
 
 return array(
-    'ilch_basic' => array(
+    'ilch_controller' => array(
         'details' => array(
-            'name' => __('Ilch Basic Module'),
-            'description' => '',
+            'name' => __('Ilch Media System'),
+            'description' => __('Can load and display media files'),
             'version' => Ilch::VERSION,
         ),
         'resources' => array(
-            'download_server' => 'http://download.ilch.net/server/ilch_basic/',
-            'download_page' => 'http://download.ilch.net/modules/ilch_basic/',
+            'download_server' => 'http://download.ilch.net/server/ilch_media/',
+            'download_page' => 'http://download.ilch.net/modules/ilch_media/',
             'homepage' => 'http://www.ilch.net/',
-            'documentation' => 'https://github.com/IlchCMS/Ilch-2/wiki/module-ilch_basic',
+            'documentation' => 'https://github.com/IlchCMS/Ilch-2/wiki/module-ilch_media',
             'support' => 'http://www.ilch.net/',
         ),
         'authors' => array(
@@ -27,7 +27,7 @@ return array(
                 'staate' => __('Germany'),
             ),
         ),
-        'required' => array('kohana_database', 'kohana_cache'),
-        'extends' => array('kohana_database')
+        'required' => array(),
+        'extends' => array()
     )
 );
