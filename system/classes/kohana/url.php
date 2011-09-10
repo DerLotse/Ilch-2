@@ -54,7 +54,7 @@ class Kohana_URL {
 			$protocol = parse_url($base_url, PHP_URL_SCHEME);
 		}
 
-		if ($index === TRUE AND ! empty(Kohana::$index_file))
+		if ($index AND ! empty(Kohana::$index_file))
 		{
 			// Add the index file to the URL
 			$base_url .= Kohana::$index_file.'/';
