@@ -83,7 +83,7 @@ class Ilch_Core {
 	{
 		// Abort if module already loaded
 		if (isset(Ilch::$modules[$module])) return TRUE;
-		
+
 		// About if module is not in the cache
 		if (!isset(Ilch::$_module_cache[$module])) return FALSE;
 		
@@ -92,13 +92,13 @@ class Ilch_Core {
 		
 		// Check module directory
 		if (!is_dir($module_path)) return FALSE;
-		
+
 		// Load configuration
 		$config = Arr::get((file_exists($module_path . 'config' . DIRSEPA . 'module' . EXT)) ? Kohana::load($module_path . 'config' . DIRSEPA . 'module' . EXT) : array(), $module, array());
 		
 		// Save version number
 		Ilch::$module_version[$module] = Ilch::version_number(Arr::get(Arr::get($config, 'details', array()), 'version', 0));
-		
+
 		// Check module version
 		if (Ilch::$_module_cache[$module] < Ilch::$module_version[$module])
 		{
@@ -110,7 +110,7 @@ class Ilch_Core {
 			// There is a later version installed
 			return FALSE;
 		}
-		
+
 		// Module position
 		$position = NULL;
 		
@@ -136,15 +136,15 @@ class Ilch_Core {
 				{
 					return FALSE;
 				}
-				
+
 				// Check module version
-				if ((isset($required_version[0]) && Ilch::$module_version[$module] >= Ilch::version_number($required_version[0])) || (isset($required_version[1]) && Ilch::$module_version[$module] <= Ilch::version_number($required_version[1])))
+				if ((isset($required_version[0]) && !(Ilch::$module_version[$module] >= Ilch::version_number($required_version[0]))) || (isset($required_version[1]) && !(Ilch::$module_version[$module] <= Ilch::version_number($required_version[1]))))
 				{
 					return FALSE;
 				}
 			}
 		}
-		
+
 		// Place using extends data
 		if (isset($config['extends']))
 		{
@@ -164,7 +164,7 @@ class Ilch_Core {
 		}
 		else
 		{
-			Ilch::$modules[$module] = Ilch::module_place($module, $module_path, $position);
+			Ilch::module_place($module, $module_path, $position);
 		}
 		
 		// Set new module positions
@@ -183,7 +183,7 @@ class Ilch_Core {
 	{
 		$i = 0;
 		$new_array = array();
-		
+
 		foreach (Ilch::$modules as $key => $value)
 		{
 			if ($position == $i) $new_array[$module_name] = $module_path;
@@ -192,7 +192,6 @@ class Ilch_Core {
 		}
 		
 		if (!isset($new_array[$module_name])) $new_array[$module_name] = $module_path;
-		
 		Ilch::$modules = $new_array;
 	}
 
@@ -294,7 +293,7 @@ class Ilch_Core {
 	public static function version_number($version)
 	{
 		// Already numeric?
-		if (is_numeric($version)) return $version;
+		if (is_numeric($version) AND strlen($version) == 10) return $version;
 		
 		// Named versions
 		$named_versions = array(

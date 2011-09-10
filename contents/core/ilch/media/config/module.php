@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'ilch_controller' => array(
+    'ilch_media' => array(
         'details' => array(
             'name' => __('Ilch Media System'),
             'description' => __('Can load and display media files'),

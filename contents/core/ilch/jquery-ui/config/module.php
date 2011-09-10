@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'ilch_basic' => array(
+    'ilch_jquery-ui' => array(
         'details' => array(
             'name' => __('jQueryUI Module'),
             'description' => __('jQuery User Interface Javascript Framework'),

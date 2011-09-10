@@ -15,7 +15,7 @@ class Model_Theme extends Model
         
         // Load first the ilchcms theme and then the others
         Kohana::modules(array(
-            $theme => MODPATH.str_replace('_', DIRSEPA, $theme)
+            $theme => Ilch::theme_path($theme)
         ) + Kohana::modules());
     }
 

@@ -1,26 +1,26 @@
 <?php
 
 return array(
-    'ilch_jquery' => array(
+    'ilch_tinymce' => array(
         'details' => array(
-            'name' => __('jQuery Module'),
-            'description' => __('jQuery Javascript Framework'),
-            'version' => '1.6.2',
+            'name' => __('TinyMCE for Ilch'),
+            'description' => '',
+            'version' => '3.4.4',
         ),
         'resources' => array(
-            'download_server' => 'http://download.ilch.net/server/ilch_jquery/',
-            'download_page' => 'http://download.ilch.net/modules/ilch_jquery/',
-            'homepage' => 'http://jquery.com/',
-            'documentation' => 'http://docs.jquery.com/',
-            'support' => 'http://forum.jquery.com/',
+            'download_server' => 'http://download.ilch.net/server/ilch_tinymce/',
+            'download_page' => 'http://download.ilch.net/modules/ilch_tinymce/',
+            'homepage' => 'http://www.tinymce.com',
+            'documentation' => 'http://www.tinymce.com/wiki.php',
+            'support' => 'http://www.tinymce.com/forum/index.php',
         ),
         'authors' => array(
         	array(
-                'name' => 'The jQuery Project',
+                'name' => 'Moxiecode Systems AB.',
                 'description' => '',
-                'website' => 'http://jquery.com/',
+                'website' => 'http://www.moxiecode.com/',
                 'email' => '',
-                'company' => '',
+                'company' => 'Moxiecode Systems AB.',
                 'address' => '',
                 'city' => '',
                 'zip_code' => '',
@@ -28,7 +28,7 @@ return array(
             ),
             array(
                 'name' => 'Florian Körner',
-                'description' => 'Adjustment to Ilch CMS',
+                'description' => '',
                 'website' => 'florian-koerner.eu',
                 'email' => 'support@florian-koerner.eu',
                 'company' => 'Florian Körner Weblösungen',

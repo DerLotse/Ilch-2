@@ -99,7 +99,7 @@ Kohana::init(array(
     'base_url' => preg_replace('/[^\/]+$/','',$_SERVER['SCRIPT_NAME']),
     'index_file' => 'index.php',
     'profile' => TRUE, // enable profiling for dev.
-    'caching' => TRUE,
+    'caching' => FALSE,
     'cache_life' => 3600 // @todo noch zu testen, ob eine Stunde sinnvoll oder doch nur eine Minute
 ));
 

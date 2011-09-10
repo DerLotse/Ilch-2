@@ -3,15 +3,15 @@
 return array(
     'ilch_user' => array(
         'details' => array(
-            'name' => __('Ilch Basic Module'),
+            'name' => __('User, Auth, Permission Module'),
             'description' => '',
             'version' => Ilch::VERSION,
         ),
         'resources' => array(
-            'download_server' => 'http://download.ilch.net/server/ilch_basic/',
-            'download_page' => 'http://download.ilch.net/modules/ilch_basic/',
+            'download_server' => 'http://download.ilch.net/server/ilch_user/',
+            'download_page' => 'http://download.ilch.net/modules/ilch_user/',
             'homepage' => 'http://www.ilch.net/',
-            'documentation' => 'https://github.com/IlchCMS/Ilch-2/wiki/module-ilch_basic',
+            'documentation' => 'https://github.com/IlchCMS/Ilch-2/wiki/module-ilch_user',
             'support' => 'http://www.ilch.net/',
         ),
         'authors' => array(
@@ -27,7 +27,7 @@ return array(
                 'staate' => __('Germany'),
             ),
         ),
-        'required' => array('kohana_database', 'kohana_cache'),
-        'extends' => array('kohana_database')
+        'required' => array('kohana_database', 'ilch_controller'),
+        'extends' => array()
     )
 );
