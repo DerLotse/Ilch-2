@@ -10,6 +10,10 @@ class Controller_Media extends Controller {
  
 	public function action_index()
 	{
+		// Load backend and frontend modules
+		Model::factory('theme')->load('backend');
+		Model::factory('theme')->load('frontend');
+		
 		// Get the file path from the request
 		$file = $this->request->param('file');
 

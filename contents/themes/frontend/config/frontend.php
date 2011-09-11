@@ -12,10 +12,9 @@ return array
         'name' => 'Standard Ilch Nr. 1',
         'description' => 'Ilch2.0 Standard Design - Frontend',
         'styles' => array(
-            Kohana::$index_file.'/media/blueprint/screen.css' => 'screen',
-            Kohana::$index_file.'/media/blueprint/print.css' => 'print',
-            Kohana::$index_file.'/media/blueprint/plugins/fancy-type/screen.css' => 'screen',
-            Kohana::$index_file.'/media/css/style.css' => 'screen'
+        	'media/css/frontend/reset.css' => 'screen',
+	        'media/css/frontend/layout.css' => 'screen',
+	        'media/css/frontend/style.css' => 'screen',
         ),
         'scripts' => array(),
     ),
