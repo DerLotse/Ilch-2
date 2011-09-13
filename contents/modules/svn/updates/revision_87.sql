@@ -1,0 +1,2 @@
+INSERT INTO `ilchcms2x`.`$prefix_modules` (`module_status`, `module_name`, `module_version`) VALUES ('1', 'ilch_event', '2.00000000');
+INSERT INTO `ilchcms2x`.`$prefix_modules` (`module_status`, `module_name`, `module_version`) VALUES ('1', 'ilch_pagination', '3.00121000');
