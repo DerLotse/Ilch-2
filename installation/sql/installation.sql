@@ -18,16 +18,15 @@ CREATE TABLE `$prefix_config` (
 -- Daten für Tabelle `$prefix_config`
 --
 
-INSERT INTO `$prefix_config` (`config_id`, `config_group`, `config_key`, `config_category`, `config_description`, `config_field_type`, `config_value`, `config_field_options`) VALUES
-(1, 'ilch', 'start_controller', 'Allgemeine Einstellungen', 'Welcher Controller soll als Startseite dienen?', 'select', 's:7:"welcome";', 'a:2:{s:5:"class";s:4:"ilch";s:8:"function";s:16:"list_controllers";}'),
-(2, 'ilch', 'default_backend_theme', 'Allgemeine Einstellungen', 'Welches Backend-Theme soll als Standard genutzt werden?', 'select', 's:24:"core_ilch_themes_backend";', 'a:2:{s:5:"class";s:4:"ilch";s:8:"function";s:19:"list_backend_themes";}'),
-(3, 'ilch', 'default_frontend_theme', 'Allgemeine Einstellungen', 'Welches Frontend-Theme soll als Standard genutzt werden?', 'select', 's:25:"core_ilch_themes_frontend";', 'a:2:{s:5:"class";s:4:"ilch";s:8:"function";s:20:"list_frontend_themes";}'),
-(4, 'ilch', 'svn_version', '', '', 'hidden', 's:2:"83";', ''),
-(5, 'auth', 'hash_key', 'Usercontrol', '', 'input', 's:58:"Muss waehrend der Installation automatisch erstellt werden";', ''),
-(6, 'auth', 'user_token_expires', 'Usercontrol', 'Wie viele Stunden ist ein automatischer Login möglich?', 'input', 's:2:"48";', ''),
-(7, 'cookie', 'salt', '', '', 'input', 's:58:"Muss waehrend der Installation automatisch erstellt werden";', ''),
-(8, 'auth', 'hash_method', 'Usercontrol', 'Welche Verschlüsselung soll für die Passwörter benutzt werden.', 'input', 's:6:"sha256";', 'a:2:{s:5:"class";s:4:"ilch";s:8:"function";s:17:"list_hash_methods";}'),
-(9, 'auth', 'register_activation', 'Usercontrol', 'Welche Schritte müssen nach der Registrierung eines neuen Benutzers erfolgen?', 'select_multiple', 'a:2:{s:18:"admin_confirmation";s:1:"1";s:18:"email_confirmation";s:1:"1";}', 'a:2:{s:5:"class";s:4:"ilch";s:8:"function";s:19:"list_register_types";}');
+INSERT INTO `$prefix_config` VALUES(1, 'ilch', 'start_controller', 'Allgemeine Einstellungen', 'Welcher Controller soll als Startseite dienen?', 'select', 's:7:"welcome";', 'a:2:{s:5:"class";s:4:"ilch";s:8:"function";s:16:"list_controllers";}');
+INSERT INTO `$prefix_config` VALUES(2, 'ilch', 'default_backend_theme', 'Allgemeine Einstellungen', 'Welches Backend-Theme soll als Standard genutzt werden?', 'select', 's:7:"backend";', 'a:2:{s:5:"class";s:4:"ilch";s:8:"function";s:19:"list_backend_themes";}');
+INSERT INTO `$prefix_config` VALUES(3, 'ilch', 'default_frontend_theme', 'Allgemeine Einstellungen', 'Welches Frontend-Theme soll als Standard genutzt werden?', 'select', 's:8:"frontend";', 'a:2:{s:5:"class";s:4:"ilch";s:8:"function";s:20:"list_frontend_themes";}');
+INSERT INTO `$prefix_config` VALUES(4, 'ilch', 'svn_version', '', '', 'hidden', 's:2:"83";', '');
+INSERT INTO `$prefix_config` VALUES(5, 'auth', 'hash_key', 'Usercontrol', '', 'input', 's:58:"Muss waehrend der Installation automatisch erstellt werden";', '');
+INSERT INTO `$prefix_config` VALUES(6, 'auth', 'user_token_expires', 'Usercontrol', 'Wie viele Stunden ist ein automatischer Login möglich?', 'input', 's:2:"48";', '');
+INSERT INTO `$prefix_config` VALUES(7, 'cookie', 'salt', '', '', 'input', 's:58:"Muss waehrend der Installation automatisch erstellt werden";', '');
+INSERT INTO `$prefix_config` VALUES(8, 'auth', 'hash_method', 'Usercontrol', 'Welche Verschlüsselung soll für die Passwörter benutzt werden.', 'input', 's:6:"sha256";', 'a:2:{s:5:"class";s:4:"ilch";s:8:"function";s:17:"list_hash_methods";}');
+INSERT INTO `$prefix_config` VALUES(9, 'auth', 'register_activation', 'Usercontrol', 'Welche Schritte müssen nach der Registrierung eines neuen Benutzers erfolgen?', 'select_multiple', 'a:2:{s:18:"admin_confirmation";s:1:"1";s:18:"email_confirmation";s:1:"1";}', 'a:2:{s:5:"class";s:4:"ilch";s:8:"function";s:19:"list_register_types";}');
 
 -- --------------------------------------------------------
 
@@ -47,9 +46,8 @@ CREATE TABLE `$prefix_groups` (
 -- Daten für Tabelle `$prefix_groups`
 --
 
-INSERT INTO `$prefix_groups` (`group_id`, `group_parent_id`, `group_core`, `group_name`) VALUES
-(1, 2, 1, 'SUPERADMIN'),
-(2, NULL, 1, 'ADMIN');
+INSERT INTO `$prefix_groups` VALUES(1, 2, 1, 'SUPERADMIN');
+INSERT INTO `$prefix_groups` VALUES(2, NULL, 1, 'ADMIN');
 
 -- --------------------------------------------------------
 
@@ -60,7 +58,7 @@ INSERT INTO `$prefix_groups` (`group_id`, `group_parent_id`, `group_core`, `grou
 CREATE TABLE `$prefix_group_config` (
   `group_id` int(11) NOT NULL,
   `config_id` int(11) NOT NULL,
-  `group_config_value` TEXT NOT NULL,
+  `group_config_value` text NOT NULL,
   PRIMARY KEY (`group_id`,`config_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -112,30 +110,39 @@ CREATE TABLE `$prefix_group_users` (
 
 CREATE TABLE `$prefix_modules` (
   `module_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `module_directory` varchar(64) DEFAULT NULL,
-  `module_active` int(2) unsigned NOT NULL,
+  `module_status` int(1) unsigned NOT NULL,
   `module_name` varchar(32) NOT NULL,
-  `module_version` decimal(11,4) NOT NULL,
+  `module_version` decimal(11,8) NOT NULL,
   PRIMARY KEY (`module_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
 -- Daten für Tabelle `$prefix_modules`
 --
 
-INSERT INTO `$prefix_modules` (`module_id`, `module_directory`, `module_active`, `module_name`, `module_version`) VALUES
-(1, NULL, 1, 'welcome', 0.0001),
-(2, 'core_ilch', 1, 'media', 1.0000),
-(3, NULL, 1, 'blueprint', 1.0000),
-(4, NULL, 1, 'svn', 1.0000),
-(6, 'core_ilch', 0, 'auth', 0.0000),
-(7, 'core_kohana', 1, 'userguide', 0.0000),
-(8, 'core_ilch', 1, 'user', 1.0000),
-(9, NULL, 1, 'cache', 1.0000),
-(10, 'core_ilch', 1, 'permission', 1.0000),
-(11, 'core_ilch', 1, 'group', 1.0000),
-(12, 'core_ilch', 1, 'controller', 1.0000),
-(13, 'core_ilch', 1, 'jquery-ui', 1.0000);
+INSERT INTO `$prefix_modules` VALUES(1, 1, 'ilch_basic', 2.00000000);
+INSERT INTO `$prefix_modules` VALUES(2, 1, 'ilch_controller', 2.00000000);
+INSERT INTO `$prefix_modules` VALUES(3, 1, 'ilch_group', 2.00000000);
+INSERT INTO `$prefix_modules` VALUES(4, 2, 'ilch_jquery', 2.00000000);
+INSERT INTO `$prefix_modules` VALUES(5, 2, 'ilch_jquery-ui', 2.00000000);
+INSERT INTO `$prefix_modules` VALUES(6, 1, 'ilch_media', 2.00000000);
+INSERT INTO `$prefix_modules` VALUES(7, 2, 'ilch_tinymce', 2.00000000);
+INSERT INTO `$prefix_modules` VALUES(8, 1, 'ilch_user', 2.00000000);
+INSERT INTO `$prefix_modules` VALUES(9, 2, 'kohana_auth', 2.30001000);
+INSERT INTO `$prefix_modules` VALUES(10, 1, 'kohana_cache', 2.30001000);
+INSERT INTO `$prefix_modules` VALUES(11, 2, 'kohana_codebench', 2.30001000);
+INSERT INTO `$prefix_modules` VALUES(12, 1, 'kohana_database', 2.30001000);
+INSERT INTO `$prefix_modules` VALUES(13, 2, 'kohana_image', 2.30001000);
+INSERT INTO `$prefix_modules` VALUES(14, 2, 'kohana_orm', 2.30001000);
+INSERT INTO `$prefix_modules` VALUES(15, 2, 'kohana_unittest', 2.30001000);
+INSERT INTO `$prefix_modules` VALUES(16, 1, 'kohana_userguide', 2.30001000);
+INSERT INTO `$prefix_modules` VALUES(17, 1, 'blueprint', 1.00001000);
+INSERT INTO `$prefix_modules` VALUES(18, 1, 'cache', 1.00001000);
+INSERT INTO `$prefix_modules` VALUES(19, 2, 'news', 1.00000000);
+INSERT INTO `$prefix_modules` VALUES(20, 1, 'svn', 1.00001000);
+INSERT INTO `$prefix_modules` VALUES(21, 1, 'welcome', 1.00000000);
+INSERT INTO `$prefix_modules` VALUES(22, 1, 'ilch_event', 2.00000000);
+INSERT INTO `$prefix_modules` VALUES(23, 1, 'ilch_pagination', 3.00121000);
 
 -- --------------------------------------------------------
 
@@ -172,6 +179,12 @@ CREATE TABLE `$prefix_sessions` (
   KEY `last_active` (`session_last_active`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Daten für Tabelle `$prefix_sessions`
+--
+
+INSERT INTO `$prefix_sessions` VALUES('4e7c29c7e640d5-64278095', 1316760008, 'YToxOntzOjExOiJsYXN0X2FjdGl2ZSI7aToxMzE2NzYwMDA4O30=');
+
 -- --------------------------------------------------------
 
 --
@@ -190,8 +203,7 @@ CREATE TABLE `$prefix_themes` (
 -- Daten für Tabelle `$prefix_themes`
 --
 
-INSERT INTO `$prefix_themes` (`theme_id`, `theme_active`, `theme_name`, `theme_version`) VALUES
-(1, 1, 'ilchcms', 0.0001);
+INSERT INTO `$prefix_themes` VALUES(1, 1, 'ilchcms', 0.0001);
 
 -- --------------------------------------------------------
 
@@ -207,7 +219,12 @@ CREATE TABLE `$prefix_users` (
   `user_email` varchar(124) NOT NULL,
   `user_nickname` varchar(32) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Daten für Tabelle `$prefix_users`
+--
+
 
 -- --------------------------------------------------------
 
