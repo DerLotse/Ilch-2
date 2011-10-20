@@ -99,7 +99,8 @@ Kohana::$config->attach(new Config_File);
  */
 Kohana::modules(array(
 	'kohana_database' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'database',
-        'kohana_guide' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'userguide',
+    'kohana_guide' => MODPATH.'core'.DIRSEPA.'kohana'.DIRSEPA.'userguide',
+	'ilch_event' => MODPATH.'core'.DIRSEPA.'ilch'.DIRSEPA.'event',
 	'ilch_media' => MODPATH.'core'.DIRSEPA.'ilch'.DIRSEPA.'media',
 	'ilch_jquery' => MODPATH.'core'.DIRSEPA.'ilch'.DIRSEPA.'jquery'
 ));

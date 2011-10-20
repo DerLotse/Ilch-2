@@ -11,7 +11,7 @@
     </head>
     <body>
     	<div id="header">
-    		<?php echo HTML::anchor(NULL, HTML::image('media/images/frontend/logo.png', NULL, NULL, TRUE)); ?>
+    		<?php echo HTML::anchor(NULL, HTML::image('frontend/media/images/frontend/logo.png', NULL, NULL, TRUE)); ?>
     	</div>
     	<div id="wrapper">
     		<div id="left_sidebar">
@@ -71,7 +71,7 @@
     			<span>
     				Design by <a href="http://www.oldesworld.de/">oldesworld.de</a> | Script Copyright by <a href="http://www.ilch.net/">ilch.net</a>
     			</span>
-    			<?php echo HTML::image('media/images/frontend/logo_footer.png', NULL, NULL, TRUE); ?>
+    			<?php echo HTML::image('frontend/media/images/frontend/logo_footer.png', NULL, NULL, TRUE); ?>
     			<br class="x" />
     		</div>
     	</div>

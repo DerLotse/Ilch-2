@@ -6,8 +6,8 @@
         <meta name="keywords" content="<?php echo $meta_keywords; ?>" />
         <meta name="description" content="<?php echo $meta_description; ?>" />
         <meta name="copyright" content="<?php echo $meta_copywrite; ?>" />
-        <?php foreach ($styles as $file => $type) echo HTML::style($file, array('media' => $type)), "\n"; ?>
-        <?php foreach ($scripts as $file) echo HTML::script($file, NULL, TRUE), "\n"; ?>
+        <?php foreach ($styles as $file => $type) echo HTML::style($file, array('media' => $type), NULL, TRUE), "\n"; ?>
+        <?php foreach ($scripts as $file) echo HTML::script($file, NULL, NULL, TRUE), "\n"; ?>
     </head>
     <body>
         <div class="container">

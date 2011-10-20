@@ -18,11 +18,14 @@ class Controller_Template_Backend extends Controller_Template_General {
 		// Run anything that need ot run before this.
 		parent::before();
 		
-		// Add Styles by Config
-		$theme_styles = Kohana::$config->load('backend')->theme['styles'];
-		if (is_array($theme_styles) && count($theme_styles) >= 1)
+		if ($this->auto_render)
 		{
-			$this->template->styles = array_merge($this->template->styles, $theme_styles);
+			// Add Styles by Config
+			$theme_styles = Kohana::$config->load('backend')->theme['styles'];
+			if (is_array($theme_styles) && count($theme_styles) >= 1)
+			{
+				$this->template->styles = array_merge($this->template->styles, $theme_styles);
+			}
 		}
 	}
 

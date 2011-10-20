@@ -12,9 +12,9 @@ return array
         'name' => 'Standard Ilch Nr. 1',
         'description' => 'Ilch2.0 Standard Design - Frontend',
         'styles' => array(
-        	'media/css/frontend/reset.css' => 'screen',
-	        'media/css/frontend/layout.css' => 'screen',
-	        'media/css/frontend/style.css' => 'screen',
+        	'frontend/media/css/frontend/reset.css' => 'screen',
+	        'frontend/media/css/frontend/layout.css' => 'screen',
+	        'frontend/media/css/frontend/style.css' => 'screen',
         ),
         'scripts' => array(),
     ),
