@@ -16,7 +16,7 @@ else
     echo Form::password('password', NULL, array('class' => 'text', 'style' => 'width: 98%;'));
     echo '</p><p>';
     echo Form::submit('Submit', 'submit');
-    echo Form::hidden('redirect', Url::site(Request::detect_uri()));
+    echo Form::hidden('redirect', Url::site(Request::detect_uri(), TRUE));
     echo '</p>';
     echo Form::close();
 }
